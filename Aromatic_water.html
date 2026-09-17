@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Smart — Aromatic Waters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#efeadd;
+    --paper-dark:#e4dcc6;
+    --ink:#2a2820;
+    --ink-soft:#5a5648;
+    --green:#41523c;
+    --green-dark:#2c3928;
+    --amber:#a9611e;
+    --rose:#93483a;
+    --sage:#7f9270;
+    --line:rgba(42,40,32,.16);
+    --card:#f7f3e9;
+    --shadow: 4px 4px 0 rgba(42,40,32,.12);
+    --radius: 3px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(42,40,32,.06) 1px, transparent 0);
+    background-size:22px 22px;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    color:var(--green-dark);
+  }
+  a{color:inherit;}
+  ::selection{background:var(--sage); color:#fff;}
+
+  /* ---------- header ---------- */
+  header.top{
+    padding:38px 6vw 22px;
+    border-bottom:2px solid var(--ink);
+    position:relative;
+  }
+  .top-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .brand-mark{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .brand-mark svg{flex-shrink:0;}
+  h1.title{
+    font-size:clamp(2.1rem, 5vw, 3.4rem);
+    letter-spacing:.2px;
+    line-height:.95;
+  }
+  .subtitle{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+    margin-top:6px;
+  }
+  .credit-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    color:var(--ink-soft);
+    text-align:right;
+    border:1px solid var(--line);
+    padding:8px 12px;
+    background:var(--card);
+    box-shadow:var(--shadow);
+  }
+  .credit-tag b{display:block; font-size:.85rem; color:var(--ink); font-family:'Fraunces',serif; font-weight:600;}
+
+  /* ---------- nav shelf ---------- */
+  nav.shelf{
+    display:flex;
+    gap:10px;
+    padding:18px 6vw 0;
+    flex-wrap:wrap;
+    background:var(--paper-dark);
+    border-bottom:2px solid var(--ink);
+  }
+  nav.shelf button{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:.92rem;
+    background:var(--card);
+    color:var(--ink);
+    border:2px solid var(--ink);
+    border-bottom:none;
+    padding:11px 20px 13px;
+    cursor:pointer;
+    position:relative;
+    top:2px;
+    transition:background .15s ease, transform .15s ease;
+    border-radius:var(--radius) var(--radius) 0 0;
+  }
+  nav.shelf button .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:2px;
+  }
+  nav.shelf button:hover{background:#fffdf7;}
+  nav.shelf button.active{
+    background:var(--paper);
+    top:0;
+    border-bottom:2px solid var(--paper);
+    color:var(--green-dark);
+  }
+  nav.shelf button.active .num{color:var(--amber);}
+
+  main{padding:34px 6vw 80px; max-width:1180px; margin:0 auto;}
+  section.panel{display:none;}
+  section.panel.active{display:block; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:14px;
+    margin-bottom:26px;
+    flex-wrap:wrap;
+  }
+  .panel-head h2{font-size:1.9rem;}
+  .panel-head p{margin:6px 0 0; color:var(--ink-soft); max-width:60ch; font-size:.95rem;}
+
+  /* =====================================================
+     1. OVERVIEW
+  ===================================================== */
+  .overview-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+    gap:18px;
+  }
+  .law-card{
+    background:var(--card);
+    border:1px solid var(--ink);
+    box-shadow:var(--shadow);
+    padding:20px 22px;
+  }
+  .law-card h3{
+    font-size:1.05rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+    color:var(--rose);
+  }
+  .law-card h3::before{
+    content:'';
+    width:9px;height:9px;
+    background:var(--rose);
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  .law-card ul{margin:0; padding-left:18px; font-size:.92rem;}
+  .law-card li{margin-bottom:6px;}
+  .law-card.wide{grid-column:1 / -1;}
+  .num-strip{
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;
+  }
+  .num-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    background:var(--green);
+    color:#fff;
+    padding:6px 10px;
+    border-radius:2px;
+  }
+
+  /* =====================================================
+     2. DIAGRAMS
+  ===================================================== */
+  .diagram-block{
+    background:var(--card);
+    border:1px solid var(--ink);
+    box-shadow:var(--shadow);
+    padding:24px;
+    margin-bottom:26px;
+  }
+  .diagram-block h3{margin-bottom:4px; font-size:1.2rem;}
+  .diagram-block .hint{font-size:.82rem; color:var(--ink-soft); margin-bottom:16px; font-family:'IBM Plex Mono',monospace;}
+
+  /* flow diagram */
+  .flow{
+    display:flex;
+    align-items:stretch;
+    gap:0;
+    flex-wrap:wrap;
+    margin-bottom:16px;
+  }
+  .flow-step{
+    flex:1 1 150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:16px 10px;
+    border:2px solid var(--green);
+    background:var(--paper);
+    cursor:pointer;
+    font-weight:600;
+    font-size:.88rem;
+    position:relative;
+    transition:background .15s;
+    min-height:64px;
+  }
+  .flow-step:hover{background:#fff;}
+  .flow-step.active{background:var(--green); color:#fff;}
+  .flow-arrow{
+    display:flex; align-items:center; justify-content:center;
+    width:34px; color:var(--amber); font-size:1.3rem; flex:0 0 auto;
+  }
+  .readout{
+    background:var(--paper-dark);
+    border-left:4px solid var(--amber);
+    padding:14px 18px;
+    font-size:.92rem;
+    min-height:52px;
+  }
+
+  /* method cards accordion */
+  .method-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px;}
+  .method-card{
+    border:1px solid var(--ink);
+    background:var(--paper);
+  }
+  .method-card button.mhead{
+    width:100%;
+    text-align:left;
+    background:var(--green);
+    color:#fff;
+    border:none;
+    padding:12px 16px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1rem;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .method-card button.mhead .plus{font-family:monospace; font-size:1.1rem;}
+  .method-card .mbody{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease, padding .3s ease;
+    padding:0 16px;
+    font-size:.88rem;
+  }
+  .method-card.open .mbody{max-height:600px; padding:14px 16px;}
+  .mbody .tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:.7rem; background:var(--sage); color:#fff; padding:2px 6px; border-radius:2px; margin:6px 6px 0 0;}
+
+  /* table */
+  table.official{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.88rem;
+    margin-top:6px;
+  }
+  table.official th{
+    background:var(--green-dark);
+    color:#fff;
+    text-align:left;
+    padding:9px 10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:500;
+    font-size:.72rem;
+    letter-spacing:.02em;
+  }
+  table.official td{
+    padding:9px 10px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  table.official tr:hover td{background:var(--paper-dark);}
+  .filter-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px;}
+  .filter-btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    background:var(--paper);
+    border:1px solid var(--ink);
+    padding:6px 10px;
+    cursor:pointer;
+  }
+  .filter-btn.active{background:var(--amber); color:#fff; border-color:var(--amber);}
+  tr.hidden-row{display:none;}
+
+  /* stability accordion */
+  .stab-item{border:1px solid var(--ink); margin-bottom:8px; background:var(--paper);}
+  .stab-item button{
+    width:100%; text-align:left; background:none; border:none;
+    padding:12px 16px; cursor:pointer;
+    font-family:'Fraunces',serif; font-weight:600; font-size:.96rem;
+    display:flex; justify-content:space-between; color:var(--rose);
+  }
+  .stab-item .sbody{max-height:0; overflow:hidden; transition:max-height .3s ease; font-size:.88rem; padding:0 16px;}
+  .stab-item.open .sbody{max-height:300px; padding-bottom:14px;}
+
+  /* =====================================================
+     3. MINI MAP
+  ===================================================== */
+  .map-wrap{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap:24px;
+  }
+  @media (max-width:800px){.map-wrap{grid-template-columns:1fr;}}
+  .map-field{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    min-height:320px;
+    max-height:620px;
+    background:var(--card);
+    border:1px solid var(--ink);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .map-center{
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:118px; height:118px;
+    border-radius:50%;
+    background:var(--green-dark);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:.92rem;
+    line-height:1.15;
+    padding:8px;
+    z-index:2;
+    box-shadow:0 0 0 6px var(--paper), 0 0 0 8px var(--ink);
+  }
+  .map-node{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    background:var(--paper);
+    border:1.5px solid var(--ink);
+    padding:6px 8px;
+    font-size:.68rem;
+    line-height:1.15;
+    font-weight:600;
+    cursor:pointer;
+    z-index:3;
+    width:100px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    transition:background .15s, color .15s, transform .15s;
+  }
+  .map-node:hover{background:var(--sage); color:#fff; transform:translate(-50%,-50%) scale(1.06);}
+  .map-node.active{background:var(--amber); color:#fff; border-color:var(--amber); z-index:4;}
+  svg.map-lines{position:absolute; inset:0; width:100%; height:100%; z-index:1;}
+  svg.map-lines line{stroke:var(--line); stroke-width:1.5px;}
+
+  /* fallback: stacked list when the field is too narrow for a clean circle */
+  .map-field.list-mode{
+    aspect-ratio:auto;
+    height:auto;
+    max-height:none;
+    padding:18px;
+    overflow:visible;
+  }
+  .map-field.list-mode svg.map-lines{display:none;}
+  .map-field.list-mode .map-center{
+    position:static;
+    transform:none;
+    width:auto; height:auto;
+    border-radius:6px;
+    margin:0 0 14px;
+    padding:10px 16px;
+    box-shadow:none;
+  }
+  .map-field.list-mode .map-node{
+    position:static;
+    transform:none;
+    width:100%;
+    min-height:auto;
+    margin-bottom:8px;
+    padding:12px 14px;
+    text-align:left;
+    justify-content:flex-start;
+    font-size:.85rem;
+  }
+
+  .map-readout{
+    background:var(--paper-dark);
+    border:1px solid var(--ink);
+    padding:22px;
+    min-height:460px;
+  }
+  .map-readout h4{color:var(--amber); font-size:1.1rem; margin-bottom:10px;}
+  .map-readout p, .map-readout ul{font-size:.92rem;}
+  .map-readout .placeholder{color:var(--ink-soft); font-style:italic; font-size:.9rem;}
+
+  /* =====================================================
+     4. FLASH CARDS
+  ===================================================== */
+  .fc-toolbar{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px; margin-bottom:18px;
+  }
+  .fc-toolbar .fc-btns{display:flex; gap:8px;}
+  .fc-toolbar button{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.76rem;
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:8px 14px;
+    cursor:pointer;
+  }
+  .fc-toolbar button:hover{background:var(--sage); color:#fff;}
+  .fc-progress{font-family:'IBM Plex Mono', monospace; font-size:.78rem; color:var(--ink-soft);}
+  .fc-stage{display:flex; justify-content:center; margin-bottom:20px;}
+  .flipcard{
+    width:100%; max-width:560px;
+    height:270px;
+    perspective:1200px;
+    cursor:pointer;
+  }
+  .flipcard-inner{
+    position:relative; width:100%; height:100%;
+    transition:transform .5s;
+    transform-style:preserve-3d;
+  }
+  .flipcard.flipped .flipcard-inner{transform:rotateY(180deg);}
+  .face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    border:2px solid var(--ink);
+    background:var(--paper);
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center;
+    padding:34px;
+    box-shadow:var(--shadow);
+  }
+  .face .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--amber); margin-bottom:14px;}
+  .face p{font-family:'Fraunces', serif; font-size:1.18rem; line-height:1.4; margin:0; color:var(--ink);}
+  .face.back{transform:rotateY(180deg); background:var(--green-dark); color:#fff;}
+  .face.back p{color:#fff; font-family:'IBM Plex Sans',sans-serif; font-size:1rem; font-weight:500;}
+  .fc-nav{display:flex; justify-content:center; gap:14px; margin-top:16px;}
+  .fc-nav button{
+    font-family:'IBM Plex Mono', monospace;
+    background:var(--ink); color:#fff; border:none; padding:10px 22px; cursor:pointer; font-size:.8rem;
+  }
+  .fc-nav button:hover{background:var(--amber);}
+  .fc-grid{
+    margin-top:34px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(34px,1fr));
+    gap:6px;
+  }
+  .fc-grid button{
+    aspect-ratio:1;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;
+    border:1px solid var(--line);
+    background:var(--card);
+    cursor:pointer;
+  }
+  .fc-grid button.current{background:var(--amber); color:#fff; border-color:var(--amber);}
+
+  /* =====================================================
+     5. QUIZ
+  ===================================================== */
+  .quiz-toolbar{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;
+  }
+  .quiz-score{
+    font-family:'IBM Plex Mono', monospace;
+    background:var(--green-dark); color:#fff; padding:8px 14px; font-size:.82rem;
+  }
+  .quiz-toolbar button{
+    font-family:'IBM Plex Mono', monospace; font-size:.76rem;
+    background:var(--card); border:1px solid var(--ink); padding:8px 14px; cursor:pointer;
+  }
+  .quiz-toolbar button:hover{background:var(--sage); color:#fff;}
+  .qcard{
+    background:var(--card);
+    border:1px solid var(--ink);
+    padding:18px 20px;
+    margin-bottom:14px;
+  }
+  .qcard .qnum{font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:var(--amber); display:block; margin-bottom:6px;}
+  .qcard .qtext{font-family:'Fraunces', serif; font-size:1.02rem; margin-bottom:12px; color:var(--ink);}
+  .opt-list{display:grid; gap:8px;}
+  .opt{
+    display:flex; align-items:center; gap:10px;
+    border:1px solid var(--line);
+    padding:9px 12px;
+    cursor:pointer;
+    font-size:.9rem;
+    background:var(--paper);
+    transition:background .15s;
+  }
+  .opt:hover{background:#fff;}
+  .opt.selected{border-color:var(--ink); background:var(--paper-dark);}
+  .opt.correct{background:#e2ecd8; border-color:var(--green);}
+  .opt.wrong{background:#f3ddd8; border-color:var(--rose);}
+  .opt .letter{font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.76rem; width:20px; flex-shrink:0;}
+  .quiz-results{
+    display:none;
+    background:var(--green-dark); color:#fff; padding:26px; text-align:center; margin-top:20px;
+  }
+  .quiz-results.show{display:block;}
+  .quiz-results h3{color:#fff; font-size:1.5rem; margin-bottom:8px;}
+
+  footer.site-footer{
+    text-align:center;
+    padding:26px 6vw 40px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.74rem;
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:640px){
+    .top-inner{align-items:flex-start;}
+    .credit-tag{text-align:left;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand-mark">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+        <circle cx="23" cy="23" r="21" stroke="#2a2820" stroke-width="2"/>
+        <path d="M23 8 L23 24 L32 33" stroke="#a9611e" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <circle cx="23" cy="23" r="3" fill="#41523c"/>
+      </svg>
+      <div>
+        <h1 class="title">Study Smart</h1>
+        <div class="subtitle">AROMATIC WATERS · PHARMACEUTICAL TECHNOLOGY I</div>
+      </div>
+    </div>
+    <div class="credit-tag"><b>Anmar Taha</b>© All rights reserved</div>
+  </div>
+</header>
+
+<nav class="shelf" id="tabNav">
+  <button class="active" data-panel="overview"><span class="num">01</span>Overview</button>
+  <button data-panel="diagrams"><span class="num">02</span>Diagrams</button>
+  <button data-panel="minimap"><span class="num">03</span>Mini Map</button>
+  <button data-panel="flashcards"><span class="num">04</span>Flash Cards</button>
+  <button data-panel="quiz"><span class="num">05</span>Quiz Bank</button>
+</nav>
+
+<main>
+
+  <!-- ============ 1. OVERVIEW ============ -->
+  <section class="panel active" id="overview">
+    <div class="panel-head">
+      <div>
+        <h2>Overview</h2>
+        <p>Not the full lecture — just the definitions, rules and numbers you need to know cold.</p>
+      </div>
+    </div>
+
+    <div class="overview-grid">
+      <div class="law-card wide">
+        <h3>What is an aromatic water?</h3>
+        <ul>
+          <li>BP definition: a clear, saturated aqueous solution of a volatile oil or other aromatic/volatile substance.</li>
+          <li>The dissolved substance has very low water solubility.</li>
+          <li>Aromatic material concentration is rather small — this is why aromatic waters are <strong>not therapeutically potent</strong>.</li>
+          <li>Main roles: flavored vehicle for water-soluble drugs, and the liquid phase of emulsions/suspensions.</li>
+        </ul>
+      </div>
+
+      <div class="law-card">
+        <h3>5 official oral vehicles</h3>
+        <ul>
+          <li>Cinnamon water — flavored vehicle, pain-relief ointment</li>
+          <li>Orange water — flavored vehicle</li>
+          <li>Peppermint water — carminative, 15 ml dose</li>
+          <li>Camphor water — eye drops, rubefacient, cough</li>
+          <li>Chloroform water — expectorant, 5–15 ml dose</li>
+        </ul>
+      </div>
+
+      <div class="law-card">
+        <h3>Non-oral aromatic waters</h3>
+        <ul>
+          <li><strong>Rose water</strong> — perfume only</li>
+          <li><strong>Hamamelis (witch hazel) water</strong> — rub, astringent, aftershave/cosmetic perfume</li>
+          <li>Hamamelis water can <em>only</em> be made by distillation</li>
+        </ul>
+      </div>
+
+      <div class="law-card">
+        <h3>4 preparation methods</h3>
+        <ul>
+          <li>1 — Distillation</li>
+          <li>2 — Solution</li>
+          <li>3 — Alternate solution (talc/silica)</li>
+          <li>4 — Dilution</li>
+        </ul>
+      </div>
+
+      <div class="law-card">
+        <h3>Stability — 4 risks</h3>
+        <ul>
+          <li>Mold growth — no preservative added</li>
+          <li>Loss of aroma on heat/light exposure</li>
+          <li>Cloudiness on cooling (saturated solution)</li>
+          <li>Salting out with electrolyte drugs</li>
+          <li>Oxidation → phosgene (chloroform water) / benzoic acid (bitter almond water)</li>
+        </ul>
+      </div>
+
+      <div class="law-card wide">
+        <h3>Numbers worth memorizing</h3>
+        <div class="num-strip">
+          <span class="num-chip">2 ml or 2 g / liter — excess oil, Solution method</span>
+          <span class="num-chip">15 min agitation</span>
+          <span class="num-chip">12 h standing time</span>
+          <span class="num-chip">15 g purified talc</span>
+          <span class="num-chip">1 liter water / 10 min — Alternate solution</span>
+          <span class="num-chip">50–55% alcohol — Dilution method</span>
+          <span class="num-chip">2 ml → 100 ml dilution</span>
+          <span class="num-chip">&lt; 1.5% final alcohol</span>
+          <span class="num-chip">Peppermint dose: 15 ml</span>
+          <span class="num-chip">Chloroform dose: 5–15 ml</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. DIAGRAMS ============ -->
+  <section class="panel" id="diagrams">
+    <div class="panel-head">
+      <div>
+        <h2>Diagrams &amp; Tables</h2>
+        <p>Click through each piece — every diagram responds to your clicks.</p>
+      </div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Distillation apparatus</h3>
+      <div class="hint">Click a stage to see what happens at that point in the setup.</div>
+      <div class="flow" id="distillFlow"></div>
+      <div class="readout" id="distillReadout">Click a stage above to begin.</div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Four preparation methods</h3>
+      <div class="hint">Click a method to expand its procedure and advantages/disadvantages.</div>
+      <div class="method-grid" id="methodGrid"></div>
+    </div>
+
+    <div class="diagram-block">
+      <h3>The 5 official aromatic waters</h3>
+      <div class="hint">Filter by category to see which waters qualify.</div>
+      <div class="filter-row" id="tableFilters"></div>
+      <table class="official">
+        <thead><tr><th>Water</th><th>Use(s)</th><th>Dose</th><th>Route</th></tr></thead>
+        <tbody id="officialTableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="diagram-block">
+      <h3>Why aromatic waters lose stability</h3>
+      <div class="hint">Click each cause to expand.</div>
+      <div id="stabilityAccordion"></div>
+    </div>
+  </section>
+
+  <!-- ============ 3. MINI MAP ============ -->
+  <section class="panel" id="minimap">
+    <div class="panel-head">
+      <div>
+        <h2>Mini Map</h2>
+        <p>Click any topic on the map — its text appears in the panel on the right.</p>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <div class="map-field" id="mapField">
+        <svg class="map-lines" id="mapLines"></svg>
+        <div class="map-center">Aromatic<br>Waters</div>
+      </div>
+      <div class="map-readout" id="mapReadout">
+        <p class="placeholder">Select a topic from the map to read about it here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. FLASH CARDS ============ -->
+  <section class="panel" id="flashcards">
+    <div class="panel-head">
+      <div>
+        <h2>Flash Cards</h2>
+        <p>Tap a card to flip it. Pick a difficulty level — 60 easy, 50 medium, or 40 hard cards, each covering the full topic.</p>
+      </div>
+    </div>
+
+    <div class="filter-row" id="fcLevelRow">
+      <button class="filter-btn active" data-level="easy">Level 1 · Easy (60)</button>
+      <button class="filter-btn" data-level="medium">Level 2 · Medium (50)</button>
+      <button class="filter-btn" data-level="hard">Level 3 · Hard (40)</button>
+    </div>
+
+    <div class="fc-toolbar">
+      <div class="fc-progress" id="fcProgress">Card 1 / 60</div>
+      <div class="fc-btns">
+        <button id="fcShuffle">Shuffle</button>
+        <button id="fcRestart">Restart</button>
+      </div>
+    </div>
+
+    <div class="fc-stage">
+      <div class="flipcard" id="flipcard">
+        <div class="flipcard-inner">
+          <div class="face front">
+            <span class="eyebrow">QUESTION</span>
+            <p id="fcFront"></p>
+          </div>
+          <div class="face back">
+            <span class="eyebrow" style="color:#c9d9bd;">ANSWER</span>
+            <p id="fcBack"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-nav">
+      <button id="fcPrev">← Prev</button>
+      <button id="fcFlip">Flip card</button>
+      <button id="fcNext">Next →</button>
+    </div>
+
+    <div class="fc-grid" id="fcGrid"></div>
+  </section>
+
+  <!-- ============ 5. QUIZ BANK ============ -->
+  <section class="panel" id="quiz">
+    <div class="panel-head">
+      <div>
+        <h2>Quiz Bank</h2>
+        <p>Pick a difficulty level — 60 easy, 50 medium, or 40 hard multiple-choice questions. Options are shuffled every time you load the quiz.</p>
+      </div>
+    </div>
+
+    <div class="filter-row" id="quizLevelRow">
+      <button class="filter-btn active" data-level="easy">Level 1 · Easy (60)</button>
+      <button class="filter-btn" data-level="medium">Level 2 · Medium (50)</button>
+      <button class="filter-btn" data-level="hard">Level 3 · Hard (40)</button>
+    </div>
+
+    <div class="quiz-toolbar">
+      <div class="quiz-score" id="quizScore">Score: 0 / 0</div>
+      <div style="display:flex; gap:8px;">
+        <button id="quizReshuffle">Reshuffle questions</button>
+        <button id="quizCheckAll">Check all answers</button>
+      </div>
+    </div>
+
+    <div id="quizList"></div>
+
+    <div class="quiz-results" id="quizResults">
+      <h3 id="quizResultTitle"></h3>
+      <p id="quizResultText"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  © Anmar Taha — Study Smart · Aromatic Waters, Pharmaceutical Technology I. All rights reserved.
+</footer>
+
+<script>
+/* ================= TAB NAVIGATION ================= */
+const navButtons = document.querySelectorAll('#tabNav button');
+navButtons.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    navButtons.forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+
+/* ================= 2. DIAGRAMS ================= */
+
+/* --- distillation flow --- */
+const distillStages = [
+  {label:'Burner', text:'A controlled heat source warms the distilling flask so the volatile oil/water mixture begins to vaporize.'},
+  {label:'Distilling flask', text:'The odoriferous plant part is placed in a suitable still with sufficient purified water and heated.'},
+  {label:'Vapors', text:'Volatile oil and water rise together as vapor into the thermometer/condenser assembly.'},
+  {label:'Condenser', text:'Cool water flows in around the vapor path, condensing the vapors back into liquid (water out, cool water in).'},
+  {label:'Receiving flask', text:'The condensed distillate collects here. Excess oil is separated from the distillate; the aqueous phase may need further clarification.'},
+  {label:'Distillate', text:'The final saturated aromatic water. If not saturated, it is re-distilled (labelled X, XX, XXX… by number of distillations).'}
+];
+const flowEl = document.getElementById('distillFlow');
+distillStages.forEach((s,i)=>{
+  const step = document.createElement('div');
+  step.className='flow-step';
+  step.textContent = s.label;
+  step.addEventListener('click', ()=>{
+    document.querySelectorAll('#distillFlow .flow-step').forEach(el=>el.classList.remove('active'));
+    step.classList.add('active');
+    document.getElementById('distillReadout').textContent = s.text;
+  });
+  flowEl.appendChild(step);
+  if(i < distillStages.length-1){
+    const arrow = document.createElement('div');
+    arrow.className='flow-arrow';
+    arrow.textContent='→';
+    flowEl.appendChild(arrow);
+  }
+});
+
+/* --- method cards --- */
+const methods = [
+  {name:'1. Distillation', body:`Place the odoriferous plant part in a still with purified water and distil; excess oil is separated, aqueous phase may need clarification.<br><br>Used for waters made from fresh plant material (stronger rose water, orange flower water) and is the <strong>only</strong> method for Hamamelis water.<span class="tag">Not economical for most waters</span>`},
+  {name:'2. Solution', body:`Agitate 2 ml/2 g excess volatile substance per liter of purified water for 15 minutes → stand 12 h to saturate → filter through <em>wetted</em> filter paper.<span class="tag">Advantage: simple</span><span class="tag">Disadvantage: slow, hazy</span>`},
+  {name:'3. Alternate solution', body:`Mix volatile material with 15 g purified talc (or siliceous earth) → agitate with 1 L purified water for 10 minutes → filter. Talc acts as a filter aid and a distribution agent.<span class="tag">Advantage: time-saving</span><span class="tag">Disadvantage: fine particles pass filter</span>`},
+  {name:'4. Dilution', body:`A concentrated alcoholic solution (50–55% alcohol) or SAA solution (e.g. Tween 80) of the oil is diluted with water — 2 ml concentrate → 100 ml, giving &lt;1.5% alcohol.<span class="tag">Advantage: dissolves more oil</span><span class="tag">Disadvantage: odor, foaming, mold risk</span>`}
+];
+const methodGrid = document.getElementById('methodGrid');
+methods.forEach(m=>{
+  const card = document.createElement('div');
+  card.className='method-card';
+  card.innerHTML = `<button class="mhead"><span>${m.name}</span><span class="plus">+</span></button><div class="mbody">${m.body}</div>`;
+  card.querySelector('.mhead').addEventListener('click', ()=>{
+    card.classList.toggle('open');
+    card.querySelector('.plus').textContent = card.classList.contains('open') ? '−' : '+';
+  });
+  methodGrid.appendChild(card);
+});
+
+/* --- official waters table --- */
+const officialWaters = [
+  {name:'Cinnamon water', use:'Flavored vehicle', use2:'Pain-relief ointment', dose:'—', route:'Oral / topical', cats:['flavored','topical']},
+  {name:'Orange water', use:'Flavored vehicle', use2:'', dose:'—', route:'Oral', cats:['flavored']},
+  {name:'Peppermint water', use:'Flavored vehicle', use2:'Carminative', dose:'15 ml', route:'Oral', cats:['flavored','carminative']},
+  {name:'Camphor water', use:'Eye drops (refreshing)', use2:'Rubefacient / soothing cough', dose:'—', route:'Ophthalmic / topical', cats:['topical']},
+  {name:'Chloroform water', use:'Flavored vehicle', use2:'Expectorant', dose:'5–15 ml', route:'Oral', cats:['flavored','expectorant']}
+];
+const tbody = document.getElementById('officialTableBody');
+function renderTable(filter){
+  tbody.innerHTML='';
+  officialWaters.forEach(w=>{
+    const show = filter==='all' || w.cats.includes(filter);
+    const tr = document.createElement('tr');
+    if(!show) tr.classList.add('hidden-row');
+    tr.innerHTML = `<td><strong>${w.name}</strong></td><td>${w.use}${w.use2? ' · '+w.use2:''}</td><td>${w.dose}</td><td>${w.route}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+const filterDefs = [
+  {key:'all', label:'All'},
+  {key:'flavored', label:'Flavored vehicle'},
+  {key:'carminative', label:'Carminative'},
+  {key:'expectorant', label:'Expectorant'},
+  {key:'topical', label:'Topical / ophthalmic'}
+];
+const filterRow = document.getElementById('tableFilters');
+filterDefs.forEach((f,i)=>{
+  const btn=document.createElement('button');
+  btn.className='filter-btn'+(i===0?' active':'');
+  btn.textContent=f.label;
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTable(f.key);
+  });
+  filterRow.appendChild(btn);
+});
+renderTable('all');
+
+/* --- stability accordion --- */
+const stabilityCauses = [
+  {title:'1 · Mold growth', body:'Many aromatic waters support mold growth, and no preservatives are typically added — making contamination a real shelf-life risk.'},
+  {title:'2 · Loss of aroma (light & heat)', body:'The solutes are volatile. Prolonged exposure to the atmosphere, especially at elevated temperature, drives the aroma off.'},
+  {title:'3 · Cloudiness on cooling', body:'Aromatic waters are saturated solutions. Lowering the temperature reduces solubility, so the aromatic component separates out — producing cloudiness.'},
+  {title:'4 · Salting out with electrolytes', body:'When used as a vehicle for electrolyte drugs, the aromatic material can be salted out. The insoluble layer collects at the top, giving a burning taste to the first dose poured.'},
+  {title:'5 · Oxidative degradation', body:'Aroma-bearing solutes and terpenes are oxidizable. Dissolved atmospheric oxygen, catalyzed by light and trace metal ions (Fe³⁺, Cu²⁺), drives autoxidation. Example: chloroform water is kept in light-resistant bottles because light catalyzes its oxidation to phosgene, a poisonous gas. Bitter almond water deposits benzoic acid crystals from the autoxidation of benzaldehyde.'}
+];
+const stabWrap = document.getElementById('stabilityAccordion');
+stabilityCauses.forEach(s=>{
+  const item=document.createElement('div');
+  item.className='stab-item';
+  item.innerHTML=`<button><span>${s.title}</span><span>+</span></button><div class="sbody"><p>${s.body}</p></div>`;
+  item.querySelector('button').addEventListener('click', ()=>item.classList.toggle('open'));
+  stabWrap.appendChild(item);
+});
+
+/* ================= 3. MINI MAP ================= */
+const mapNodes = [
+  {title:'Definition', text:'The BP defines aromatic waters as clear, saturated aqueous solutions of volatile oils or other aromatic/volatile substances. The dissolved substances have very low water solubility, and the concentration of aromatic material is rather small.'},
+  {title:'Uses & Potency', text:'Aromatic waters act as a pleasantly flavored medium for water-soluble drugs and as the liquid phase of emulsions and suspensions. They are not therapeutically potent, because the proportion of active ingredient present is very small.'},
+  {title:'Official Oral Waters', text:'Cinnamon water (flavored vehicle, pain-relief ointment), Orange water (flavored vehicle), Peppermint water (carminative, 15 ml dose), Camphor water (eye drops, rubefacient, cough relief) and Chloroform water (expectorant, dose 5–15 ml).'},
+  {title:'Non-Oral Waters', text:'Rose water is used purely as a perfume. Hamamelis (witch hazel) water is used as a rub and as an astringent/perfume in aftershave lotions and cosmetics — and it can only be prepared by distillation.'},
+  {title:'Distillation', text:'The odoriferous plant part is placed in a still with sufficient purified water and distilled; excess oil is separated from the distillate and the aqueous phase may need further clarification. Products are labelled X, XX, XXX by number of distillations; re-distillation is used to reach saturation if the first pass falls short.'},
+  {title:'Solution Method', text:'Excess volatile substance (2 ml or 2 g per liter) is agitated with purified water for 15 minutes, left to stand at least 12 hours to saturate, then filtered through wetted filter paper (wetting prevents oil passage and stops the filter absorbing dissolved aromatic). Easy and cheap, but slow and can stay hazy.'},
+  {title:'Chloroform Water', text:'A saturated solution is kept by always having excess chloroform present with purified water, shaken vigorously; chloroform (heavier than water) settles at the bottom. Its high volatility creates an equilibrium of loss and restoration by evaporation. The bottle should never be shaken before use — only the supernatant liquid is dispensed.'},
+  {title:'Alternate Solution', text:'Volatile material is mixed with 15 g purified talc (or siliceous earth), agitated with 1 liter of purified water for 10 minutes, then filtered. Talc works as a filter aid and a distribution agent. Time-saving, but fine particles can pass through the filter — elutriation with water removes remaining fine/soluble material.'},
+  {title:'Peppermint Oil', text:'Peppermint oil is a complex mixture of hydrocarbons (terpenes), alcohols, ethers, aldehydes and ketones. The terpenes are least water soluble and are mostly removed by filtration. Terpeneless oils ("aroma carriers"), made by fractional distillation/extraction, are stronger, more soluble and more stable than the natural oil, but cost more.'},
+  {title:'Dilution Method', text:'Concentrated forms are diluted with purified water when needed — e.g. dilute rose water is strong rose water plus an equal volume of water. An alcoholic solution (50–55% alcohol) of the oil, or a non-ionic surfactant such as Tween 80/Tween 20, replaces plain water as the carrier; 2 ml of concentrate diluted to 100 ml gives under 1.5% alcohol.'},
+  {title:'Stability', text:'Aromatic waters support mold growth (no preservative added), lose aroma on prolonged heat/light exposure, turn cloudy on cooling (saturated solutions), can salt out with electrolyte drugs, and undergo light/metal-catalyzed oxidation — e.g. chloroform to phosgene, benzaldehyde to benzoic acid crystals.'}
+];
+const mapField = document.getElementById('mapField');
+const mapLines = document.getElementById('mapLines');
+const mapReadout = document.getElementById('mapReadout');
+
+function selectMapNode(el, node){
+  document.querySelectorAll('.map-node').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  mapReadout.innerHTML = `<h4>${node.title}</h4><p>${node.text}</p>`;
+}
+
+function layoutMap(){
+  mapField.querySelectorAll('.map-node').forEach(n=>n.remove());
+  mapLines.innerHTML='';
+
+  const n = mapNodes.length;
+  const nodeW = 100, nodeH = 40, nodeGap = 16, edgeMargin = 14;
+  const w = mapField.clientWidth, h = mapField.clientHeight;
+
+  // radius a single ring needs so adjacent node boxes never touch
+  const angleStep = (2*Math.PI)/n;
+  const neededRadius = ((nodeW+nodeGap)/2) / Math.sin(angleStep/2);
+  const maxRadius = Math.min(w,h)/2 - (Math.max(nodeW,nodeH)/2 + edgeMargin);
+
+  if(maxRadius < neededRadius){
+    // not enough room for a clean circle — fall back to a simple stacked list
+    mapField.classList.add('list-mode');
+    mapNodes.forEach(node=>{
+      const el = document.createElement('div');
+      el.className='map-node';
+      el.textContent = node.title;
+      el.addEventListener('click', ()=>selectMapNode(el, node));
+      mapField.appendChild(el);
+    });
+    return;
+  }
+
+  mapField.classList.remove('list-mode');
+  const radius = Math.min(maxRadius, neededRadius*1.35);
+  const cx = w/2, cy = h/2;
+
+  mapNodes.forEach((node,i)=>{
+    const angle = i*angleStep - Math.PI/2;
+    const x = cx + radius*Math.cos(angle);
+    const y = cy + radius*Math.sin(angle);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1', cx); line.setAttribute('y1', cy);
+    line.setAttribute('x2', x); line.setAttribute('y2', y);
+    mapLines.appendChild(line);
+
+    const el = document.createElement('div');
+    el.className='map-node';
+    el.style.left = x+'px';
+    el.style.top = y+'px';
+    el.textContent = node.title;
+    el.addEventListener('click', ()=>selectMapNode(el, node));
+    mapField.appendChild(el);
+  });
+}
+layoutMap();
+let mapResizeTimer;
+window.addEventListener('resize', ()=>{
+  clearTimeout(mapResizeTimer);
+  mapResizeTimer = setTimeout(layoutMap, 120);
+});
+
+/* ================= 4. FLASH CARDS ================= */
+const flashDataEasy = [
+  ["According to the BP, aromatic waters are clear, saturated aqueous solutions of what two things?", "Volatile oils or other aromatic/volatile substances."],
+  ["What water solubility do the substances dissolved in aromatic waters have?", "Very low water solubility."],
+  ["Is the concentration of aromatic material in an aromatic water large or small?", "Rather small (low)."],
+  ["True or false — aromatic waters are usually saturated solutions.", "True."],
+  ["Name the two main uses of aromatic waters as vehicles.", "A pleasantly flavored medium for water-soluble drugs, and the liquid phase of emulsions and suspensions."],
+  ["Are aromatic waters therapeutically potent?", "No."],
+  ["Why are aromatic waters not therapeutically potent?", "Because the proportion of active ingredient present is very small."],
+  ["What quality do aromatic waters give to a liquid medicine?", "A pleasant flavor."],
+  ["List the five official aromatic waters used as oral vehicles.", "Cinnamon water, Orange water, Peppermint water, Camphor water, Chloroform water."],
+  ["What is cinnamon water used for?", "A flavored vehicle and a pain-relieving ointment."],
+  ["What is the dose of peppermint water?", "15 ml."],
+  ["What is the dose range of chloroform water?", "5–15 ml."],
+  ["Which aromatic water is used purely as a perfume?", "Rose water."],
+  ["What is another name for Hamamelis water?", "Witch hazel water."],
+  ["Name one use of Hamamelis water.", "A rub (also astringent, or perfume in aftershave/cosmetics)."],
+  ["Are rose water and Hamamelis water used as vehicles for oral medication?", "No."],
+  ["List the four general methods for preparing aromatic waters.", "Distillation, Solution, Alternate solution, Dilution."],
+  ["Which preparation method is listed first among the four?", "Distillation."],
+  ["Which method is listed last among the four?", "Dilution."],
+  ["How many general methods of preparing aromatic waters are there?", "Four."],
+  ["Can most aromatic waters be prepared by distillation?", "Yes."],
+  ["Is distillation practical and economical to use for most aromatic waters?", "No, it is not practical or economically feasible in most cases."],
+  ["Name two aromatic waters that are prepared directly from fresh plant material by distillation.", "Stronger rose water and orange flower water."],
+  ["Which aromatic water can be prepared only by distillation?", "Hamamelis (witch hazel) water."],
+  ["What does each 'X' represent in a distillation product labeled X, XX, XXX?", "One distillation."],
+  ["What does a product labeled 'XXXX' mean?", "That the distillation process was repeated four times."],
+  ["What is the process of repeating distillation called?", "Re-distillation."],
+  ["Why is re-distillation carried out?", "To obtain a saturated solution if it was not obtained from the first distillation."],
+  ["In the Solution method, how much excess volatile substance is used per liter of purified water?", "2 ml or 2 g per liter."],
+  ["How long is the mixture agitated with purified water in the Solution method?", "15 minutes."],
+  ["How long must the mixture stand to ensure saturation in the Solution method?", "At least 12 hours."],
+  ["What must the filter paper be before filtering in the Solution method?", "Wet."],
+  ["How is a saturated chloroform water solution maintained?", "By adding/keeping an excess of chloroform present with purified water, shaken vigorously."],
+  ["Why does the excess chloroform settle at the bottom of the container?", "Because chloroform is heavier than water."],
+  ["Should the chloroform water bottle be shaken before dispensing?", "No."],
+  ["Which part of the chloroform water should be used when dispensing?", "Only the supernatant (clear top) liquid."],
+  ["In the Alternate solution method, how much purified talc is mixed with the volatile material?", "15 g (or a sufficient quantity of purified siliceous earth/silica)."],
+  ["How long is the talc-volatile material mixture agitated with a liter of purified water?", "10 minutes, prior to filtration."],
+  ["What is the main advantage of the Alternate solution method?", "Time saving."],
+  ["Name the two roles the talc (or inert material) plays in this method.", "A filter aid and a distribution agent."],
+  ["What is elutriation used for in the Alternate solution method?", "To remove soluble material and finely divided particles."],
+  ["What is elutriation, in simple terms?", "A process for separating particles based on their size, shape, and density, using a stream of liquid."],
+  ["What medium is used to carry out elutriation in this context?", "Water (a stream of liquid, specifically water)."],
+  ["Which preparation method's disadvantage does elutriation help solve?", "The Alternate solution method's problem of fine talc/silica particles passing through the filter."],
+  ["Name the chemical classes that make up peppermint oil.", "Hydrocarbons (usually terpenes), alcohols, ethers, aldehydes, and ketones."],
+  ["Which fraction of peppermint oil is the least water soluble?", "The terpenes (hydrocarbon fraction)."],
+  ["How is the terpene fraction mostly removed from peppermint water?", "By filtration (a clarification process)."],
+  ["What are terpeneless oils also called?", "Aroma carriers."],
+  ["What is the Dilution method designed to allow, when the aromatic water is needed?", "Dilution with an appropriate volume of purified water when needed."],
+  ["How is dilute rose water prepared from strong rose water?", "By diluting it with an equal volume of water."],
+  ["What alcohol concentration is used in the Dilution method's alcoholic solution of essential oil?", "50–55% alcohol."],
+  ["Name a non-ionic surfactant (SAA) mentioned as an alternative to alcohol in the Dilution method.", "Tween 80 (polysorbate 80) — or Tween 20."],
+  ["What is one advantage of using SAA (surfactant) solutions in the Dilution method?", "They dissolve larger amounts of water-insoluble material (and the concentrate is stable)."],
+  ["Name one disadvantage of SAA-based dilution related to smell.", "It possesses an objectionable odor."],
+  ["How does the pH of SAA-based aromatic waters compare to the official (standard) pH?", "It is lower than the official pH."],
+  ["What happens to SAA solutions when agitated?", "They foam excessively."],
+  ["Are preservatives typically added to aromatic waters?", "No."],
+  ["What can grow in many aromatic waters because no preservatives are added?", "Mold."],
+  ["What two environmental factors cause aromatic waters to lose their desirable characteristics?", "Excessive exposure to light and changes in temperature."],
+  ["What crystals form in bitter almond water on storage, and from what reaction?", "Benzoic acid crystals, from the autoxidation of benzaldehyde."]
+];
+
+const flashDataMedium = [
+  ["Why must the volatile substance have low water solubility for an aromatic water to form a stable saturated solution at a small concentration?", "Because a substance with low water solubility saturates the water at only a small dissolved amount, so a 'saturated' solution can still contain a small (pharmacologically weak) concentration."],
+  ["An aromatic water is described as 'saturated' — does this mean it necessarily contains a large amount of dissolved substance?", "No; saturation depends on the substance's (low) solubility limit, not on the absolute amount, so a saturated aromatic water can still hold only a small concentration."],
+  ["Contrast the aromatic (volatile) oil and the finished aromatic water in terms of what is dissolved and in what phase.", "The aromatic oil is the poorly water-soluble odorous substance itself; the aromatic water is the resulting aqueous phase in which a small, saturated amount of that oil is dissolved."],
+  ["If a volatile oil were highly water soluble instead of having low solubility, how would that change the 'small concentration' feature of an aromatic water?", "A highly soluble oil would let the saturated solution hold a much larger concentration, so the water would no longer show the typical small/weak aromatic concentration."],
+  ["Why are aromatic waters well suited to be the liquid phase of an emulsion or suspension rather than a treatment on their own?", "They are simply pleasantly flavored aqueous vehicles with a very low concentration of active material, so they can carry water-soluble drugs or disperse phases without contributing meaningful pharmacological activity themselves."],
+  ["A patient assumes chloroform water will relieve their cough on its own because it is 'medicated water.' Is this assumption correct?", "No; aromatic waters contain only a very small proportion of active ingredient and are not therapeutically potent — any real effect comes mainly from drugs dissolved in them or their role as a flavored vehicle."],
+  ["How does the small concentration of active material in aromatic waters relate to their intended role as a vehicle rather than a drug?", "Because they hold very little dissolved aromatic material, they cannot deliver a meaningful dose on their own, so their role is to flavor or physically carry other water-soluble drugs, not to treat disease directly."],
+  ["Which official aromatic water is used both as a flavored vehicle and topically in a pain-relief ointment?", "Cinnamon water."],
+  ["Compare the roles of peppermint water and orange water as vehicles.", "Both are flavored vehicles, but peppermint water also has a specific therapeutic role as a carminative (15 ml dose), while orange water is used purely as a flavoring agent."],
+  ["Camphor water is used in the eye, on the skin, and for cough. Name these three specific applications.", "As refreshing eye drops, as a rubefacient (skin), and to soothe cough."],
+  ["What two therapeutic roles does chloroform water serve besides being a flavored vehicle?", "An expectorant preparation, at a dose of 5–15 ml."],
+  ["List all the uses of Hamamelis (witch hazel) water mentioned.", "Used commonly as a rub, and as an astringent and perfume in aftershave lotion and other cosmetic products."],
+  ["Why are rose water and Hamamelis water grouped together in the lecture, separate from the five oral waters?", "Because unlike Cinnamon, Orange, Peppermint, Camphor, and Chloroform water, rose water and Hamamelis water are not used as vehicles for oral medication — they serve external/cosmetic (perfume, rub, astringent) purposes instead."],
+  ["What preparation restriction is unique to Hamamelis water among all the aromatic waters discussed?", "It cannot be prepared by any method other than distillation."],
+  ["Of the four preparation methods, which one is described as impractical/uneconomical for most waters despite being the most direct?", "Distillation."],
+  ["Which two of the four methods rely on adding purified water to a volatile substance and then filtering the mixture?", "Solution and Alternate solution."],
+  ["Which method starts from an already-concentrated solution rather than from raw volatile oil mixed directly into water?", "Dilution."],
+  ["Describe the basic distillation method for preparing an aromatic water in your own words.", "The odoriferous part of the plant is placed in a suitable still with sufficient purified water, and most of the water is carefully distilled off; the excess oil is then separated from the distillate, and the remaining aqueous phase may require further clarification."],
+  ["Why is distillation not the usual choice for most aromatic waters even though 'most aromatic waters can be prepared' this way?", "Because other methods (Solution, Alternate solution, Dilution) achieve a similar product at low cost with simple equipment, making distillation impractical and uneconomical for routine, large-scale use."],
+  ["In the distillation apparatus, what is the function of the condenser, and how is it operated?", "The condenser cools the rising vapors back into liquid; cool water flows in around the vapor path ('cool water in', 'water out') to condense the vapor into the distillate."],
+  ["What happens to the 'excess oil' produced during distillation, and why does this step matter?", "It is separated from the distillate; this matters because the finished aromatic water should be an aqueous solution, not an oil–water mixture."],
+  ["If a product is labeled 'XX,' how many times was it distilled, and under what circumstance would this labeling be used?", "Twice; this labeling is used when the first distillation did not achieve a saturated solution, so the product was redistilled once more to increase concentration."],
+  ["Explain the relationship between the 'X' labeling system and the concept of saturation in aromatic waters.", "Each additional distillation (each extra 'X') represents another attempt to bring the dissolved aromatic material closer to (or maintain) the saturation point required by the BP definition; more X's generally indicate more passes were needed to reach that saturated state."],
+  ["Would a well-executed single distillation that already yields a saturated product ever be labeled 'XX'?", "No; the number of X's reflects the actual number of distillations performed, so a properly saturated product achieved on the first pass would be labeled simply 'X.'"],
+  ["Why must the filter paper be wetted before filtering in the Solution method?", "To prevent excess oil from passing into the filtrate, and to eliminate absorption of the dissolved aromatic substance by the (dry) filter paper."],
+  ["What are the two main advantages of the Solution method?", "It is an easy method and requires simple equipment."],
+  ["Describe the main disadvantage of the Solution method and how it can be reduced.", "Despite repeated filtration, it is difficult to obtain a clear preparation because of fine particles; this can be obviated (reduced) by using boiling purified water."],
+  ["List the full sequence of steps in the Solution method, in order.", "Agitate excess volatile substance (2 ml/2 g per liter) with purified water for 15 minutes → set aside for at least 12 hours to ensure saturation → filter through wetted filter paper."],
+  ["What does the 'high volatility of chloroform' create in the container, and why is this important?", "It creates an equilibrium of loss and restoration of strength by evaporation — as dissolved chloroform is lost, the excess undissolved chloroform layer replenishes the aqueous phase, keeping the solution saturated over time."],
+  ["Why must an excess of chloroform always be present in the preparation, rather than adding just enough to saturate the water once?", "Because chloroform is highly volatile and continuously lost from the aqueous phase, so without a reserve (excess) layer to replenish it, the solution would gradually fall out of saturation."],
+  ["Explain why shaking the chloroform water bottle before dispensing would be undesirable.", "Shaking would mix the heavier, undissolved excess chloroform layer at the bottom back into the aqueous phase, so a dose taken afterward could contain a variable and excessive amount of chloroform rather than the correct saturated aqueous concentration."],
+  ["Explain how talc acts as a 'distribution agent' in the Alternate solution method.", "It breaks up the aromatic substance into fine particles, increasing the surface area exposed to solvent (water) action, which accelerates the rate of dissolution."],
+  ["Explain how talc acts as a 'filter aid' in the Alternate solution method.", "It facilitates the clarification of the solution during filtration (helping produce a clearer filtrate)."],
+  ["What is the main disadvantage of the Alternate solution method, and what technique can address it?", "Fine talc or siliceous earth particles can pass through the commonly used filter papers; elutriation with water is used to remove this soluble/finely divided material."],
+  ["Explain why elutriation, rather than simply using a finer filter paper, is chosen to address the fine-particle problem in the Alternate solution method.", "Elutriation separates particles based on their physical properties (size, shape, density) using a flowing liquid stream, which can selectively remove very fine or partially soluble talc/silica particles that would otherwise pass through even standard filter papers."],
+  ["How does elutriation relate to the concept of 'particle size' as a source of pharmaceutical preparation problems?", "It directly targets the fact that finely divided talc or siliceous earth particles are small enough to pass through commonly used filter papers, so elutriation is a size/density-based separation technique suited to removing such small particulate contaminants."],
+  ["Is elutriation part of the four main preparation methods, or something else?", "It is not one of the four main methods itself; it is a supplementary purification/separation technique used specifically to correct a disadvantage of the Alternate solution method."],
+  ["How are terpeneless oils (aroma carriers) prepared?", "By fractional distillation and/or extraction."],
+  ["Compare terpeneless oils to natural essential oil (terpene oils) in terms of aroma strength, solubility, and stability.", "Terpeneless oils are stronger in aroma, more soluble, and more stable than the natural essential oil."],
+  ["What is the trade-off/downside of using terpeneless oils instead of the natural essential oil?", "They are of higher expense (cost more)."],
+  ["Describe the full procedure for making the alcoholic-solution version of the Dilution method, from mixing to filtering.", "An alcoholic solution (50–55% alcohol) of the essential oil is mixed with water and talc; the mixture is agitated, and after several hours it is filtered."],
+  ["How is the final diluted aromatic water made from the concentrated aromatic solution, and what is its resulting alcohol content?", "By diluting 2 ml of the concentrated aromatic solution to 100 ml with water; the resultant product contains less than 1.5% alcohol."],
+  ["Give the composition of the example SAA-based peppermint water formula from the lecture.", "Peppermint oil 7.5 ml, Tween 20 43 ml, purified water q.s. ad 100 ml."],
+  ["List all the disadvantages of SAA-based dilution mentioned in the lecture.", "Objectionable odor, lower-than-official pH, excessive foaming on agitation, more readily disagreeable taste, easily subject to mold growth, more oil needed to saturate the aqueous phase for the same aroma, and dissolving of the terpenes as well."],
+  ["Why does an SAA-based aromatic water need 'more oil dissolved to saturate the aqueous phase' to produce the same aroma as a non-SAA version?", "Because the SAA dissolves the terpenes along with the desired aroma-carrying constituents, more total oil must be added to achieve the same perceived aromatic strength."],
+  ["What are the two advantages of SAA solutions listed in the lecture?", "They dissolve larger amounts of water-insoluble material, and the resulting concentrate is stable."],
+  ["Explain why prolonged exposure to the atmosphere, particularly at elevated temperature, causes loss of aroma in aromatic waters.", "Because the dissolved solutes are volatile materials, prolonged exposure allows them to evaporate/escape from the solution, and elevated temperature increases this volatilization."],
+  ["Why does lowering the temperature of an aromatic water cause cloudiness?", "Aromatic waters are saturated solutions, and lowering the temperature reduces the solubility of the aromatic component, causing it to separate out of solution and produce cloudiness."],
+  ["What is meant by 'salting out' of an aromatic water, and under what circumstance does it occur?", "It is the separation of the aromatic component when the aromatic water is used as a vehicle for drugs that are electrolytes; the insoluble material collects on top of the liquid."],
+  ["What consequence does salting out have for the patient taking the first dose of the medicine?", "The insoluble material collected on top imparts a burning taste to the first dose."]
+];
+
+const flashDataHard = [
+  ["Explain, in terms of solubility equilibrium, why increasing the amount of volatile oil added to purified water beyond saturation does not increase the aromatic water's dissolved concentration.", "Once the aqueous phase is saturated, the solution has reached its solubility limit for that substance at that temperature; any additional oil added simply remains as a separate excess (undissolved) phase rather than dissolving further, so the dissolved concentration stays fixed by the compound's low solubility."],
+  ["A student says 'aromatic waters are potent medicines because they are saturated solutions.' Identify the flaw in this reasoning using the BP definition.", "Saturation refers only to the solvent being at its solubility limit for a poorly soluble substance, not to a high or therapeutic concentration; because these substances have very low water solubility, even a saturated solution contains only a small amount of aromatic material, so aromatic waters remain therapeutically weak despite being 'saturated.'"],
+  ["A formulator wants to use peppermint water as the sole carminative treatment for a patient, relying on the pharmacopoeial dose of 15 ml. Critically evaluate this plan given what is known about aromatic waters' potency.", "Peppermint water at its official 15 ml dose can still provide a mild carminative effect because it is specifically listed with that therapeutic use and dose; however, in general aromatic waters are not therapeutically potent due to the very low concentration of dissolved oil, so relying on an aromatic water alone for a stronger or sustained effect would be inappropriate."],
+  ["Explain why 'flavored vehicle' and 'therapeutically inactive' are not contradictory descriptions of the same aromatic water.", "A substance can impart taste/odor at extremely low concentrations that are far below what is needed for a pharmacological effect, so an aromatic water can be perceptibly flavored (useful as a vehicle) while still carrying too little active material to be therapeutically potent."],
+  ["Camphor water is applied to the eye 'for its refreshing properties' as well as used as a rubefacient elsewhere on the body. Explain how the same aromatic water can have seemingly opposite local effects.", "The concentration and site of application determine the effect — at low concentration on delicate mucosa (the eye) camphor water produces a mild cooling/soothing sensation, whereas on the skin (a rubefacient use) it is used at a strength/site that produces mild local irritation and increased blood flow; the effect is dose- and site-dependent rather than fixed."],
+  ["A pharmacist must select an official aromatic water as a flavored vehicle for a cough preparation that also needs mild expectorant action. Which water best fits, and why not peppermint water?", "Chloroform water is the better choice because it is specifically listed as a flavored vehicle with expectorant action; peppermint water, while also a flavored vehicle, is officially associated with carminative (digestive/gas-relief) action rather than expectorant action."],
+  ["Both peppermint water and chloroform water have official doses while cinnamon and orange waters are described only as flavored vehicles without a stated dose. What does this difference imply?", "It implies peppermint and chloroform waters are used with an expectation of a measurable pharmacological effect (carminative/expectorant) at a defined dose, whereas cinnamon and orange waters are intended purely as flavoring/vehicle components without a specific therapeutic dosing requirement."],
+  ["Explain the pharmaceutical significance of the fact that Hamamelis water can only be prepared by distillation, in contrast to most other aromatic waters.", "Most aromatic waters can, in principle, be made by simpler, cheaper, non-distillation methods because their oils can be added directly to water; Hamamelis water's active/aromatic constituents apparently cannot be reconstituted adequately by those shortcut methods, so distillation directly from the fresh plant material is mandatory."],
+  ["A cosmetic manufacturer wants to substitute rose water for Hamamelis water in an aftershave astringent formulation because 'they are both non-oral aromatic waters.' Evaluate this substitution.", "This substitution is inappropriate because, despite both being non-oral, they serve different functional roles — rose water is used purely as a perfume with no stated astringent action, while Hamamelis water specifically provides an astringent effect; substituting rose water would lose the astringent property needed in an aftershave."],
+  ["Rank the four preparation methods from least to most likely to require a filtration step to remove undissolved particulate matter, and justify the ranking.", "Distillation (may need only 'further clarification') < Dilution (filtered 'after several hours' in the alcoholic-solution variant) < Solution (explicitly filtered through wetted filter paper) ≈ Alternate solution (explicitly filtered, with talc/silica particle problems); the ranking follows the increasing emphasis each method's description places on removing excess oil or solid particles."],
+  ["A manufacturer needs a fast, large-batch method for an aromatic water and is willing to accept a slightly lower-purity product with more foaming issues. Which of the four methods best fits, and why?", "Dilution using a non-ionic surfactant (SAA) solution, because it is associated with a stable, concentrated form that can be quickly diluted with water — though it carries the disadvantages of odor, foaming, low pH, and mold susceptibility."],
+  ["Explain why Hamamelis water is an exception to the general principle that 'other methods are of low cost and simple equipment' compared to distillation.", "While the Solution, Alternate solution, and Dilution methods are cheaper/simpler for most volatile oils that can be directly mixed with water, Hamamelis water's characteristic aromatic constituents cannot be adequately obtained this way, so distillation remains the only viable method specifically for it."],
+  ["A distillation is performed once and the resulting product is not saturated. Explain the corrective process and what the final labeling would show if this correction is repeated so that three distillations total are performed.", "If the first distillate is not saturated, the aqueous distillate is re-distilled to increase concentration until saturation is achieved; if the whole process is carried out three times in total, the product would be labeled 'XXX,' since each X denotes one distillation."],
+  ["Explain the purpose of 'sufficient purified water' in the still, and why distilling 'most of the water, carefully' is emphasized rather than distilling all of it.", "Enough purified water must be present to properly carry the volatile oil's odoriferous vapors and leave a usable aqueous distillate; distilling most (not all) of the water carefully ensures a practical volume of aromatic distillate is collected without over-concentrating, scorching the plant material, or wasting effort recovering every last drop."],
+  ["Compare the process needed for Hamamelis water with that for Stronger rose/orange flower water — both made by distillation of fresh plant material. Why are they grouped under the same category despite Hamamelis being a stricter requirement?", "All three share the same essential apparatus and process — odoriferous plant material heated with purified water in a still, condensed, and collected as distillate — the difference is that rose and orange flower water could theoretically be attempted by other (impractical) methods, whereas for Hamamelis distillation is the sole viable route."],
+  ["A quality control chemist finds that a batch of stronger rose water is under-saturated after a single distillation. Outline the exact corrective action and its expected labeling outcome.", "The chemist should re-distill the product (an additional distillation pass) to raise the concentration to saturation; since a second distillation was required, the corrected batch should be labeled 'XX,' reflecting the two total distillations performed."],
+  ["Critically assess whether 'more distillations always means a better aromatic water,' using the concept of saturation.", "No — since aromatic waters are defined as saturated solutions, once saturation is reached further distillation adds no additional benefit and does not further increase the aromatic concentration; extra distillations beyond saturation would simply be unnecessary."],
+  ["Explain, mechanistically, why using boiling purified water helps solve the clarity (fine particle) problem of the Solution method.", "Boiling purified water can better wet/disperse and dissolve the volatile substance and any fine particulate matter, reducing the amount of finely divided, filter-passing material remaining suspended, thereby helping achieve a clearer final preparation upon cooling and filtration."],
+  ["The Solution method is described as both 'easy, simple equipment' and yet 'time consuming.' Reconcile these seemingly conflicting characterizations.", "'Easy' and 'simple equipment' refer to the technical simplicity and low cost of the process, whereas 'time consuming' refers to the overall duration required — 15 minutes of agitation plus at least 12 hours of standing — meaning the process is technically simple but takes a long time to complete."],
+  ["A technician skips the 12-hour standing period and filters the mixture immediately after 15 minutes of agitation. Predict the likely consequence.", "The mixture would likely not yet be saturated, since the standing period is specifically meant 'to ensure saturation'; filtering too early would probably yield an aromatic water below the intended saturated concentration and possibly still containing unsettled fine particles."],
+  ["Using density and volatility principles, explain the full physical basis for why chloroform water is prepared and stored with excess chloroform, and how this compensates for the compound's instability.", "Chloroform (denser than water) naturally forms a separate layer beneath the aqueous phase when present in excess; because chloroform is highly volatile and continually evaporates/dissolves from that reservoir, the two-phase system is self-regulating — as dissolved chloroform is depleted from the water, more diffuses from the excess layer to re-saturate it."],
+  ["A pharmacist dispenses a dose of chloroform water by first shaking the bottle. Analyze the two ways this practice could compromise the product.", "First, shaking would resuspend some of the denser excess chloroform layer into the dispensed dose, delivering an unpredictable, possibly excessive amount of chloroform; second, this directly contradicts the explicit instruction that the bottle should not be shaken and only the clear supernatant liquid should be used."],
+  ["Chloroform water's preparation description does not mention distillation, talc filtration, or dilution of a concentrate. Which general preparation category does it most closely resemble, and why?", "It most closely resembles the Solution method, since both involve directly agitating/mixing an excess of the volatile substance with purified water to reach saturation; the key difference is that chloroform water relies on gravity separation and the supernatant for dispensing, owing to chloroform's higher density and volatility."],
+  ["Compare the mechanism by which talc speeds up dissolution to the mechanism by which boiling water fixes clarity problems in the Solution method. Are they addressing the same underlying issue?", "No — talc addresses dissolution rate/efficiency by physically increasing the surface area of the aromatic substance, whereas boiling water addresses a clarity/filtration issue by better dispersing or removing fine particulate matter after the substance is already largely dissolved; one targets the rate of dissolving, the other targets the purity of the final filtered product."],
+  ["A manufacturer notices that despite repeated filtration, their Alternate-solution-method aromatic water remains slightly hazy. Diagnose the likely cause and recommend the corrective process.", "The haze is likely caused by very finely divided purified talc or siliceous earth particles (or partially soluble silica) passing through the commonly used filter papers; the recommended corrective process is elutriation with water, which separates particles by size, shape, and density using a stream of liquid."],
+  ["If talc's dual role were removed from the Alternate solution method, predict which specific advantage and disadvantage would most likely disappear.", "Without talc, the time-saving advantage (from accelerated dissolution due to increased surface area) would likely disappear, since dissolution would proceed more slowly; conversely, the disadvantage of fine particles passing through the filter would also disappear, since there would be no talc/silica particles to cause that problem."],
+  ["Explain the physical principle that allows elutriation to separate soluble material and fine particles using only a stream of liquid, without a filter membrane.", "Elutriation exploits differences in particle size, shape, and density that affect how particles are carried or settle within a moving liquid stream — smaller, lighter, or differently shaped particles are swept away or take longer to settle than larger/denser ones, so a controlled liquid stream separates fine talc/silica or soluble material from the desired product."],
+  ["A student proposes skipping elutriation and instead using a much longer standing/settling time to let fine talc particles sink. Would this achieve the same result?", "Not necessarily — very fine particles may settle extremely slowly or not at all under gravity alone (especially if close in density to the liquid), whereas elutriation actively separates particles using a controlled liquid flow, making it more reliable for removing fine or partially soluble contaminants."],
+  ["Explain the logical connection between 'terpenes are the least water soluble fraction' and the clarification/filtration step performed on peppermint water.", "Because terpenes barely dissolve in water, when peppermint oil is mixed with water most of the terpene fraction remains undissolved as fine droplets; filtration physically removes this insoluble terpene fraction, leaving a clearer aqueous solution enriched in the more water-compatible alcohols, ethers, aldehydes, and ketones."],
+  ["A manufacturer wants a peppermint-flavored aqueous product that is both very clear and very stable, and is willing to pay more. Which form of peppermint oil should they use, and why?", "They should use the terpeneless oil (aroma carrier), because — despite its higher cost — it is described as more soluble and more stable than the natural essential oil, directly matching the manufacturer's priorities of clarity and stability."],
+  ["If a batch of peppermint water is filtered to remove terpenes but a competing product instead uses terpeneless oil from the start, predict which product would need less clarification filtration.", "The product made from terpeneless oil would need less or no clarification filtration, because the poorly soluble terpene fraction has already been removed during the fractional distillation/extraction process used to make the terpeneless oil."],
+  ["Using the diluted aromatic water example (2 ml of concentrate diluted to 100 ml, giving <1.5% alcohol), estimate the approximate alcohol percentage in the original concentrated solution.", "If 2 ml of concentrate diluted to 100 ml gives about 1.5% alcohol, then the concentrate itself was roughly (1.5% × 100 ml) / 2 ml ≈ 75% alcohol — showing the concentrate must be a fairly strong alcoholic solution before dilution."],
+  ["Compare the alcohol-based and SAA-based Dilution variants in terms of what replaces plain water as part of the vehicle, and the shared principle behind both.", "In the alcohol-based variant, a 50–55% alcoholic solution of the oil (with talc) forms the concentrate; in the SAA-based variant, a non-ionic surfactant such as Tween 80/20 solubilizes the oil instead. Both share the principle that a concentrated, stable carrier solution is prepared first, then diluted with purified water to the strength needed at the time of use."],
+  ["A formulator substitutes Tween 80 for Tween 20 in the peppermint water SAA formula while keeping the same total volume and oil amount. What property should be checked before assuming this works equally well?", "The surfactant's ability to dissolve/solubilize the required amount of peppermint oil is most relevant, since different non-ionic surfactants can have different solubilizing power, odor, pH effects, and foaming tendencies, so the substitution should be checked against these SAA-related properties before assuming equivalence."],
+  ["A QC report shows an SAA-based aromatic water has developed a disagreeable taste and early mold growth after several weeks. Using the lecture's list of disadvantages, explain both findings and their common vulnerability.", "Both findings are explicitly listed disadvantages of SAA-based dilution — SAA solutions 'develop disagreeable taste more readily' and are 'easily subject to mold growth'; the common underlying vulnerability is the lack of protective properties (and typically no preservative) needed to resist microbial growth and flavor degradation over time."],
+  ["SAA solutions 'dissolve the terpenes also,' listed as a disadvantage. Relate this to terpeneless oils and explain why this could work against their purpose in an SAA formulation.", "Terpeneless oils are valued because the poorly soluble, less stable terpene fraction has already been removed to give a stronger, more soluble, more stable aroma; if an SAA also dissolves any residual terpenes, this could reintroduce terpene-related instability, partially undermining the purpose of choosing the more expensive terpene-free oil form."],
+  ["Weigh the advantage 'SAA dissolves larger amounts of water-insoluble material' against the disadvantage 'more oil must be dissolved for the same aroma.' Are these contradictory?", "They are not contradictory: the advantage refers to the SAA's higher solubilizing capacity for oil in general, while the disadvantage refers to the fact that, because SAA also dissolves the terpenes (diluting aroma contribution), a larger total quantity of oil must be dissolved to achieve the same aroma intensity."],
+  ["Explain mechanistically why light and trace metal ions such as iron(III) and copper(II) accelerate autoxidation of aroma-bearing solutes and terpenes, and give the two examples cited in the lecture.", "These solutes are oxidizable compounds; dissolved atmospheric oxygen can react with them, and this autoxidation is catalyzed by light and by trace metal ions such as Fe³⁺ and Cu²⁺. Examples: chloroform is oxidized (light-catalyzed) into the poisonous gas phosgene, which is why chloroform water is stored in light-resistant bottles; and benzaldehyde in bitter almond water autoxidizes to form benzoic acid crystals."],
+  ["A batch of chloroform water is stored in a clear glass bottle on a sunlit windowsill for weeks. Identify the specific hazard and the lecture's indicated prevention strategy.", "Light can catalyze the oxidation of chloroform into phosgene, a poisonous gas, so storing chloroform water in clear glass under light risks generating this toxic byproduct; the lecture's indicated prevention is to store chloroform water in light-resistant (opaque/amber) bottles."],
+  ["An aromatic water is used as a vehicle for an electrolyte drug and is also stored cold. Explain how both conditions could independently cause cloudiness in the same bottle.", "Cold storage causes cloudiness because aromatic waters are saturated solutions — lowering temperature reduces the aromatic component's solubility, forcing it out of solution; separately, using the water for an electrolyte drug can 'salt out' the aromatic component (an ionic-strength effect); both mechanisms reduce effective solubility via different routes but both manifest as visible separation/cloudiness."]
+];
+
+let flashLevel = 'easy';
+let flashData = flashDataEasy;
+let fcOrder = flashData.map((_,i)=>i);
+let fcIndex = 0;
+const fcFrontEl = document.getElementById('fcFront');
+const fcBackEl = document.getElementById('fcBack');
+const flipcardEl = document.getElementById('flipcard');
+const fcProgress = document.getElementById('fcProgress');
+const fcGrid = document.getElementById('fcGrid');
+
+function buildFcGrid(){
+  fcGrid.innerHTML='';
+  fcOrder.forEach((cardIdx, pos)=>{
+    const b = document.createElement('button');
+    b.textContent = pos+1;
+    b.addEventListener('click', ()=>{ fcIndex = pos; renderCard(); });
+    fcGrid.appendChild(b);
+  });
+}
+function renderCard(){
+  flipcardEl.classList.remove('flipped');
+  const dataIdx = fcOrder[fcIndex];
+  fcFrontEl.textContent = flashData[dataIdx][0];
+  fcBackEl.textContent = flashData[dataIdx][1];
+  fcProgress.textContent = `Card ${fcIndex+1} / ${flashData.length}`;
+  document.querySelectorAll('#fcGrid button').forEach((b,i)=>b.classList.toggle('current', i===fcIndex));
+}
+flipcardEl.addEventListener('click', ()=>flipcardEl.classList.toggle('flipped'));
+document.getElementById('fcFlip').addEventListener('click', ()=>flipcardEl.classList.toggle('flipped'));
+document.getElementById('fcNext').addEventListener('click', ()=>{ fcIndex=(fcIndex+1)%flashData.length; renderCard(); });
+document.getElementById('fcPrev').addEventListener('click', ()=>{ fcIndex=(fcIndex-1+flashData.length)%flashData.length; renderCard(); });
+document.getElementById('fcRestart').addEventListener('click', ()=>{ fcOrder = flashData.map((_,i)=>i); fcIndex=0; buildFcGrid(); renderCard(); });
+document.getElementById('fcShuffle').addEventListener('click', ()=>{
+  for(let i=fcOrder.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [fcOrder[i],fcOrder[j]]=[fcOrder[j],fcOrder[i]]; }
+  fcIndex=0; buildFcGrid(); renderCard();
+});
+const fcLevelBtns = document.querySelectorAll('#fcLevelRow .filter-btn');
+const fcLevelSets = {easy:flashDataEasy, medium:flashDataMedium, hard:flashDataHard};
+fcLevelBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    fcLevelBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    flashLevel = btn.dataset.level;
+    flashData = fcLevelSets[flashLevel];
+    fcOrder = flashData.map((_,i)=>i);
+    fcIndex = 0;
+    buildFcGrid();
+    renderCard();
+  });
+});
+
+buildFcGrid();
+renderCard();
+
+/* ================= 5. QUIZ BANK ================= */
+const quizDataEasy = [
+  {"q": "According to the BP, aromatic waters are clear, saturated aqueous solutions of what?", "a": "Volatile oils or other aromatic/volatile substances", "d": ["Oil-soluble tinctures of resins", "Alcoholic extracts of resins", "Supersaturated sugar syrups"]},
+  {"q": "What water solubility do the substances used in aromatic waters have?", "a": "Very low water solubility", "d": ["High water solubility", "Complete insolubility in all solvents", "Moderate solubility only in alcohol"]},
+  {"q": "The concentration of aromatic material in an aromatic water is:", "a": "Rather small", "d": ["Always above 50%", "Exactly 10%", "Very high"]},
+  {"q": "Aromatic waters are usually described as:", "a": "Saturated solutions", "d": ["Supersaturated solutions", "Dilute unsaturated solutions", "Colloidal suspensions"]},
+  {"q": "What are the two main vehicle uses of aromatic waters?", "a": "Flavored medium for water-soluble drugs, and liquid phase of emulsions/suspensions", "d": ["Sterile diluent for injections and preservative base", "Solid dosage filler and coating agent", "Primary antimicrobial treatment and antiseptic"]},
+  {"q": "Are aromatic waters therapeutically potent?", "a": "No", "d": ["Yes, always", "Only when refrigerated", "Only in double-strength form"]},
+  {"q": "Why are aromatic waters not therapeutically potent?", "a": "The active ingredient is present in a very small proportion", "d": ["They contain no water", "They are always expired quickly", "They lack any odor"]},
+  {"q": "What quality do aromatic waters add to a liquid medicine?", "a": "A pleasant flavor", "d": ["A strong therapeutic dose", "A preservative effect", "A change in drug pH only"]},
+  {"q": "Which of these is NOT one of the five official oral aromatic waters?", "a": "Rose water", "d": ["Cinnamon water", "Peppermint water", "Chloroform water"]},
+  {"q": "Cinnamon water is used as a flavored vehicle and:", "a": "A pain-relieving ointment", "d": ["An expectorant preparation", "A carminative at 15 ml", "Eye drops"]},
+  {"q": "What is the official dose of peppermint water?", "a": "15 ml", "d": ["5 ml", "50 ml", "100 ml"]},
+  {"q": "What is the official dose range of chloroform water?", "a": "5–15 ml", "d": ["15 ml only", "1–2 ml", "20–30 ml"]},
+  {"q": "Which aromatic water is used purely as a perfume?", "a": "Rose water", "d": ["Orange water", "Chloroform water", "Camphor water"]},
+  {"q": "Hamamelis water is also known as:", "a": "Witch hazel water", "d": ["Bitter almond water", "Stronger rose water", "Orange flower water"]},
+  {"q": "Hamamelis water is used commonly as:", "a": "A rub", "d": ["An oral carminative", "An expectorant vehicle", "A pain-relief flavoring"]},
+  {"q": "Are rose water and Hamamelis water used as vehicles for oral medication?", "a": "No", "d": ["Yes, always", "Only rose water is", "Only Hamamelis water is"]},
+  {"q": "How many general methods exist for preparing aromatic waters?", "a": "4", "d": ["2", "3", "5"]},
+  {"q": "The four methods of preparing aromatic waters are:", "a": "Distillation, Solution, Alternate solution, Dilution", "d": ["Distillation, Extraction, Maceration, Percolation", "Filtration, Sublimation, Crystallization, Precipitation", "Solution, Suspension, Emulsion, Percolation"]},
+  {"q": "Which method is listed first among the four preparation methods?", "a": "Distillation", "d": ["Solution", "Alternate solution", "Dilution"]},
+  {"q": "Which method is listed last among the four preparation methods?", "a": "Dilution", "d": ["Distillation", "Solution", "Alternate solution"]},
+  {"q": "Can most aromatic waters be prepared by distillation?", "a": "Yes", "d": ["No, never", "Only Hamamelis water can", "Only synthetic waters can"]},
+  {"q": "Is distillation generally practical/economical for most aromatic waters?", "a": "No", "d": ["Yes, always", "Only for camphor water", "Only in large factories"]},
+  {"q": "Which two waters are prepared directly from fresh plant material by distillation?", "a": "Stronger rose water and orange flower water", "d": ["Cinnamon water and orange water", "Peppermint water and camphor water", "Chloroform water and Hamamelis water"]},
+  {"q": "Which aromatic water can ONLY be prepared by distillation?", "a": "Hamamelis (witch hazel) water", "d": ["Peppermint water", "Chloroform water", "Cinnamon water"]},
+  {"q": "Each 'X' in a distillation product label (X, XX, XXX) represents:", "a": "One distillation", "d": ["One liter produced", "One hour of heating", "One type of plant used"]},
+  {"q": "A product labeled 'XXXX' has been distilled:", "a": "Four times", "d": ["Once", "Twice", "Ten times"]},
+  {"q": "The process of repeating distillation is called:", "a": "Re-distillation", "d": ["Re-dilution", "Re-filtration", "Re-crystallization"]},
+  {"q": "Re-distillation is carried out mainly to:", "a": "Obtain a saturated solution if not achieved on the first pass", "d": ["Remove all volatile oil from the product", "Add preservatives", "Increase the alcohol content"]},
+  {"q": "In the Solution method, how much excess volatile substance is used per liter of water?", "a": "2 ml or 2 g", "d": ["10 ml or 10 g", "0.5 ml or 0.5 g", "15 g"]},
+  {"q": "In the Solution method, the mixture is agitated with purified water for:", "a": "15 minutes", "d": ["5 minutes", "1 hour", "30 seconds"]},
+  {"q": "After agitation, the Solution method mixture is set aside for at least:", "a": "12 hours", "d": ["1 hour", "24 hours", "1 week"]},
+  {"q": "In the Solution method, filtration is performed through:", "a": "Wetted filter paper", "d": ["Dry filter paper only", "A muslin cloth", "Activated charcoal"]},
+  {"q": "A saturated chloroform water solution is maintained by:", "a": "Keeping an excess of chloroform present with purified water, shaken vigorously", "d": ["Boiling the mixture continuously", "Adding talc to the mixture", "Diluting with alcohol"]},
+  {"q": "Excess chloroform settles at the bottom of the container because:", "a": "Chloroform is heavier than water", "d": ["Chloroform is lighter than water", "Chloroform reacts with the glass", "Chloroform evaporates instantly"]},
+  {"q": "When dispensing chloroform water, the bottle should:", "a": "Not be shaken", "d": ["Always be shaken vigorously", "Be heated first", "Be diluted before shaking"]},
+  {"q": "Which part of chloroform water should be used for dispensing?", "a": "Only the supernatant liquid", "d": ["The entire bottle contents after shaking", "Only the bottom sediment layer", "Equal parts top and bottom"]},
+  {"q": "In the Alternate solution method, how much purified talc is mixed with the volatile material?", "a": "15 g (or sufficient siliceous earth/silica)", "d": ["150 g", "1.5 g", "50 g"]},
+  {"q": "The talc-volatile mixture is agitated with a liter of purified water for how long before filtration?", "a": "10 minutes", "d": ["1 hour", "2 minutes", "24 hours"]},
+  {"q": "The main advantage of the Alternate solution method is:", "a": "Time saving", "d": ["Lower cost than all other methods", "No filtration required", "Produces a completely clear product every time"]},
+  {"q": "The two functions of talc in the Alternate solution method are:", "a": "Filter aid and distribution agent", "d": ["Preservative and coloring agent", "Solvent and stabilizer", "Acid and base"]},
+  {"q": "Elutriation is used in the Alternate solution method to remove:", "a": "Soluble material and finely divided particles", "d": ["Excess purified water", "Dissolved terpenes only", "All volatile oil"]},
+  {"q": "Elutriation separates particles based on:", "a": "Size, shape, and density, using a stream of liquid", "d": ["Color and smell only", "Chemical charge alone", "Boiling point"]},
+  {"q": "What medium carries out elutriation in this context?", "a": "A stream of water/liquid", "d": ["Compressed air", "Activated charcoal", "Ethanol vapor"]},
+  {"q": "Elutriation specifically helps solve a disadvantage of which method?", "a": "The Alternate solution method", "d": ["The Dilution method", "Distillation", "The chloroform water process"]},
+  {"q": "Peppermint oil is a complex mixture of:", "a": "Hydrocarbons (terpenes), alcohols, ethers, aldehydes, and ketones", "d": ["Only water and terpenes", "Proteins and carbohydrates", "Only alcohols and esters"]},
+  {"q": "Which fraction of peppermint oil is the least water soluble?", "a": "Terpenes", "d": ["Alcohols", "Ketones", "Ethers"]},
+  {"q": "The terpene fraction is mostly removed from peppermint water by:", "a": "Filtration", "d": ["Freezing", "Boiling for one hour", "Adding salt"]},
+  {"q": "Terpeneless oils are also known as:", "a": "Aroma carriers", "d": ["Essential concentrates", "Volatile residues", "Distillation byproducts"]},
+  {"q": "The Dilution method is designed for products that:", "a": "Are diluted with an appropriate volume of purified water when needed", "d": ["Must never be diluted", "Require heating before use", "Are used only as perfumes"]},
+  {"q": "Dilute rose water is prepared from strong rose water by:", "a": "Diluting with an equal volume of water", "d": ["Adding double the volume of alcohol", "Distilling it a second time", "Filtering through talc"]},
+  {"q": "The alcoholic solution used in the Dilution method contains what concentration of alcohol?", "a": "50–55%", "d": ["10–15%", "70–75%", "90–95%"]},
+  {"q": "A non-ionic surfactant mentioned as an alcohol alternative in the Dilution method is:", "a": "Tween 80 (polysorbate 80)", "d": ["Sodium lauryl sulfate", "Benzalkonium chloride", "Cetrimide"]},
+  {"q": "An advantage of SAA solutions in the Dilution method is that they:", "a": "Dissolve larger amounts of water-insoluble material", "d": ["Eliminate the need for filtration entirely", "Prevent all mold growth", "Always raise pH above official limits"]},
+  {"q": "A disadvantage of SAA-based dilution related to smell is:", "a": "An objectionable odor", "d": ["No odor at all", "An overly sweet odor", "A permanent loss of aroma"]},
+  {"q": "How does SAA-based aromatic water pH compare to the official pH?", "a": "It is lower than official", "d": ["It is always higher than official", "It is identical to official", "It has no defined pH"]},
+  {"q": "SAA solutions, when agitated, tend to:", "a": "Foam excessively", "d": ["Never foam", "Crystallize instantly", "Turn a different color"]},
+  {"q": "Are preservatives typically added to aromatic waters?", "a": "No", "d": ["Yes, always", "Only chloroform water contains one", "Only if refrigerated"]},
+  {"q": "Because no preservatives are added, many aromatic waters support the growth of:", "a": "Mold", "d": ["Crystals", "Terpenes", "Phosgene"]},
+  {"q": "What two environmental factors cause loss of desirable characteristics in aromatic waters?", "a": "Excessive light exposure and changes in temperature", "d": ["High humidity and low pressure", "Excess oxygen and low light", "High pH and low volume"]},
+  {"q": "Bitter almond water deposits crystals of what compound, formed from what reaction?", "a": "Benzoic acid, from autoxidation of benzaldehyde", "d": ["Phosgene, from oxidation of chloroform", "Talc, from filtration residue", "Terpene oil, from fractional distillation"]}
+];
+
+const quizDataMedium = [
+  {"q": "A saturated aromatic water can contain only a small amount of dissolved oil because:", "a": "The oil has very low water solubility, so saturation is reached at a low concentration", "d": ["Saturation always requires a high concentration", "The BP allows unsaturated products to be labeled saturated", "Water has an unusually high capacity for oils"]},
+  {"q": "If a substance had high water solubility instead of low solubility, its saturated aqueous solution would most likely:", "a": "Contain a much higher concentration of dissolved substance", "d": ["Still contain a small, fixed concentration", "Be impossible to prepare", "Automatically become an aromatic water"]},
+  {"q": "The term 'aromatic water' mainly distinguishes the aqueous phase from:", "a": "The poorly water-soluble aromatic oil itself", "d": ["Any oral liquid dosage form", "Emulsions in general", "All pharmaceutical solvents"]},
+  {"q": "Why can 'saturated' and 'low concentration' both correctly describe the same aromatic water?", "a": "Because saturation is set by the substance's own (low) solubility limit, not by a fixed high amount", "d": ["Because the BP definition is inconsistent", "Because saturation only applies to solids", "Because concentration and saturation are unrelated terms"]},
+  {"q": "Aromatic waters are well suited as the liquid phase of an emulsion or suspension mainly because:", "a": "They are pleasantly flavored vehicles with minimal pharmacological activity of their own", "d": ["They chemically stabilize all electrolytes", "They are always more viscous than water", "They prevent all microbial growth"]},
+  {"q": "A patient believing chloroform water alone will treat their cough is mistaken because:", "a": "Aromatic waters contain only a very small proportion of active ingredient", "d": ["Chloroform water contains no chloroform at all", "Aromatic waters are banned for cough treatment", "Chloroform water must always be combined with alcohol"]},
+  {"q": "The small concentration of active material in aromatic waters mainly limits their role to:", "a": "Flavoring or carrying other water-soluble drugs", "d": ["Acting as a sole curative treatment", "Serving as an injectable solvent", "Replacing all preservatives in formulations"]},
+  {"q": "Which official aromatic water combines a flavoring role with topical pain relief?", "a": "Cinnamon water", "d": ["Orange water", "Camphor water", "Rose water"]},
+  {"q": "Compared with orange water, peppermint water additionally has an official use as:", "a": "A carminative at a 15 ml dose", "d": ["An injectable diluent", "A rubefacient for skin", "A preservative"]},
+  {"q": "Camphor water's specific uses include refreshing eye drops, soothing cough, and:", "a": "A rubefacient", "d": ["A carminative", "An expectorant", "A perfume"]},
+  {"q": "Besides being a flavored vehicle, chloroform water is officially used as:", "a": "An expectorant preparation, dosed at 5–15 ml", "d": ["A carminative, dosed at 15 ml", "A rubefacient applied topically", "An astringent in cosmetics"]},
+  {"q": "Besides being used as a rub, Hamamelis water also serves as:", "a": "An astringent and perfume in aftershave lotion/cosmetics", "d": ["An oral expectorant", "A carminative dosed at 15 ml", "A flavored vehicle for syrups"]},
+  {"q": "Rose water and Hamamelis water are grouped separately from the five oral waters because:", "a": "They are not used as vehicles for oral medication", "d": ["They cannot be prepared at all", "They contain no volatile oils", "They are synthetic rather than natural"]},
+  {"q": "A unique preparation restriction that applies to Hamamelis water among all discussed aromatic waters is:", "a": "It can only be prepared by distillation", "d": ["It can only be diluted, never concentrated", "It must always contain talc", "It cannot be filtered"]},
+  {"q": "Which method is described as impractical/uneconomical for most waters despite being the most direct?", "a": "Distillation", "d": ["Solution", "Alternate solution", "Dilution"]},
+  {"q": "Which two methods both involve agitating a volatile substance with purified water and then filtering?", "a": "Solution and Alternate solution", "d": ["Distillation and Dilution", "Distillation and Solution", "Alternate solution and Dilution"]},
+  {"q": "Which method starts from an already-concentrated solution rather than raw oil mixed directly with water?", "a": "Dilution", "d": ["Distillation", "Solution", "Alternate solution"]},
+  {"q": "In the distillation method, after distilling, excess oil is:", "a": "Separated from the distillate", "d": ["Left mixed permanently with the water", "Discarded before heating begins", "Converted directly into terpeneless oil"]},
+  {"q": "Distillation is avoided for most waters mainly because:", "a": "Other methods are cheaper and use simpler equipment", "d": ["Distillation destroys all aroma", "Distillation is illegal for aromatic waters", "Distillation cannot produce saturation"]},
+  {"q": "In the distillation apparatus, the condenser's function is to:", "a": "Cool rising vapors back into liquid using circulating cool water", "d": ["Heat the distilling flask", "Store the finished distillate", "Measure the temperature of vapors"]},
+  {"q": "Removing 'excess oil' from the distillate matters because:", "a": "The finished aromatic water should be an aqueous solution, not an oil–water mixture", "d": ["Oil improves the taste when left in", "Oil prevents mold growth", "Oil is required for BP compliance"]},
+  {"q": "A product labeled 'XX' indicates it was distilled:", "a": "Twice, because the first pass did not reach saturation", "d": ["Twice, for no particular reason", "Only once, with a typographical duplicate", "Twenty times"]},
+  {"q": "The number of X's in the labeling system generally reflects:", "a": "How many passes were needed to reach the required saturation", "d": ["The plant species used", "The exact volume in liters", "The alcohol percentage of the product"]},
+  {"q": "A product that is already saturated after a single distillation would correctly be labeled:", "a": "'X'", "d": ["'XX'", "'XXX'", "'XXXX'"]},
+  {"q": "The filter paper is wetted in the Solution method to:", "a": "Prevent passage of excess oil and stop the filter absorbing dissolved aromatic", "d": ["Speed up the filtration time only", "Add moisture to the finished product", "Neutralize the solution's pH"]},
+  {"q": "The two advantages of the Solution method are:", "a": "Easy method and simple equipment", "d": ["Fast and requires no filtration", "Cheap and produces no fine particles", "Simple and always perfectly clear"]},
+  {"q": "The main disadvantage of the Solution method, and its remedy, are:", "a": "Difficulty obtaining a clear preparation, obviated by boiling purified water", "d": ["Excessive foaming, obviated by using cold water", "High cost, obviated by using less talc", "Slow dissolution, obviated by shaking harder"]},
+  {"q": "The correct step order for the Solution method is:", "a": "Agitate 15 min → stand 12+ hours → filter through wetted paper", "d": ["Filter → agitate → stand", "Stand 12 hours → filter → agitate 15 min", "Agitate → filter → stand 12 hours"]},
+  {"q": "The high volatility of chloroform creates an equilibrium of loss and restoration of strength by:", "a": "Evaporation", "d": ["Filtration", "Oxidation", "Crystallization"]},
+  {"q": "An excess of chloroform must always be kept present in the preparation because:", "a": "Chloroform is continuously lost from solution due to its volatility", "d": ["Chloroform improves the color of the product", "Chloroform prevents oxidation of terpenes", "Chloroform must react fully with water first"]},
+  {"q": "Shaking the chloroform water bottle before dispensing is undesirable because it would:", "a": "Remix the denser excess chloroform layer into the dose, giving a variable/excessive amount", "d": ["Improve the taste of every dose", "Have no effect on the dose delivered", "Permanently dissolve all excess chloroform"]},
+  {"q": "Talc acts as a 'distribution agent' in the Alternate solution method by:", "a": "Breaking the aromatic substance into fine particles, increasing surface area and accelerating dissolution", "d": ["Neutralizing the pH of the mixture", "Absorbing all excess water", "Converting terpenes into terpeneless oil"]},
+  {"q": "Talc acts as a 'filter aid' in this method by:", "a": "Facilitating clarification of the solution", "d": ["Preventing any filtration from being necessary", "Increasing the alcohol content", "Reducing agitation time to zero"]},
+  {"q": "The main disadvantage of the Alternate solution method, and its remedy, are:", "a": "Fine particles passing through the filter, remedied by elutriation with water", "d": ["Excessive cost, remedied by using less talc", "Poor aroma, remedied by adding more oil", "Slow dissolution, remedied by boiling"]},
+  {"q": "Elutriation is preferred over simply using finer filter paper because it:", "a": "Separates particles by physical properties (size/shape/density) using flow, targeting very fine or partly soluble particles", "d": ["Is always cheaper than any filter paper", "Requires no equipment at all", "Eliminates the need for any filtration step in general"]},
+  {"q": "Elutriation relates to particle size problems because it:", "a": "Directly removes finely divided particles small enough to pass standard filters", "d": ["Increases particle size before filtration", "Converts particles into a gas", "Has no relation to particle size at all"]},
+  {"q": "Elutriation is best classified as:", "a": "A supplementary purification technique, not one of the four main preparation methods", "d": ["One of the four main preparation methods", "A type of distillation", "A synonym for the Dilution method"]},
+  {"q": "Terpeneless oils (aroma carriers) are prepared by:", "a": "Fractional distillation and/or extraction", "d": ["Simple filtration alone", "Adding excess talc", "Boiling in purified water for 15 minutes"]},
+  {"q": "Compared to natural essential oil, terpeneless oils are:", "a": "Stronger in aroma, more soluble, and more stable", "d": ["Weaker in aroma and less stable", "Identical in every property", "Cheaper but less soluble"]},
+  {"q": "The main downside of using terpeneless oils instead of natural essential oil is:", "a": "Higher expense", "d": ["Lower aroma strength", "Reduced stability", "Increased insolubility"]},
+  {"q": "The alcoholic-solution variant of the Dilution method is prepared by:", "a": "Mixing the alcoholic oil solution with water and talc, agitating, then filtering after several hours", "d": ["Boiling the oil directly in water for 15 minutes", "Adding oil to talc alone with no water", "Distilling the oil twice before use"]},
+  {"q": "The final diluted aromatic water is made by diluting how much concentrate to 100 ml with water?", "a": "2 ml", "d": ["10 ml", "50 ml", "25 ml"]},
+  {"q": "The example SAA-based peppermint water formula includes peppermint oil, Tween 20, and:", "a": "Purified water q.s. ad 100 ml", "d": ["Ethanol q.s. ad 100 ml", "Glycerin q.s. ad 100 ml", "Propylene glycol q.s. ad 100 ml"]},
+  {"q": "Which of the following is NOT listed as a disadvantage of SAA-based dilution?", "a": "Increased long-term stability", "d": ["Objectionable odor", "Excessive foaming", "Susceptibility to mold growth"]},
+  {"q": "SAA-based aromatic water needs more oil to saturate the aqueous phase for the same aroma mainly because:", "a": "The SAA also dissolves the terpenes, diluting/altering the aroma contribution", "d": ["SAA destroys the oil chemically", "SAA lowers water's boiling point", "SAA prevents any oil from dissolving"]},
+  {"q": "The two advantages of SAA solutions listed are:", "a": "Dissolving larger amounts of insoluble material and forming a stable concentrate", "d": ["Lower cost and no odor", "Higher pH and no foaming", "Faster distillation and less talc use"]},
+  {"q": "Prolonged exposure to the atmosphere at elevated temperature causes loss of aroma because:", "a": "The dissolved solutes are volatile and evaporate more readily", "d": ["The water itself chemically decomposes", "Terpenes convert into talc", "Preservatives degrade first"]},
+  {"q": "Lowering the temperature of an aromatic water causes cloudiness because:", "a": "It is a saturated solution, and reduced solubility forces the aromatic component out of solution", "d": ["Cold water always turns cloudy regardless of contents", "Cooling increases the solubility of all substances", "Ice crystals form from the volatile oil directly"]},
+  {"q": "'Salting out' of an aromatic water occurs when it is used as a vehicle for:", "a": "Drugs which are electrolytes", "d": ["Non-electrolyte drugs only", "Oil-soluble vitamins", "Preservative-free syrups"]},
+  {"q": "A consequence of salting out for the first dose taken from a bottle is:", "a": "A burning taste, from insoluble material collected on top", "d": ["An improved, sweeter taste", "No noticeable effect", "Instant precipitation of all the water"]}
+];
+
+const quizDataHard = [
+  {"q": "Adding oil beyond the saturation point to an aromatic water preparation results in:", "a": "An undissolved excess phase, with dissolved concentration unchanged", "d": ["A proportional increase in dissolved concentration", "Immediate degradation of all dissolved oil", "Conversion of the oil into terpenes"]},
+  {"q": "The statement 'aromatic waters are potent because they are saturated' is flawed mainly because:", "a": "Saturation reflects a low solubility limit, not a high or therapeutic concentration", "d": ["Aromatic waters are never actually saturated", "Potency depends only on pH", "Saturation always implies high potency in pharmacy"]},
+  {"q": "Relying on peppermint water alone as a strong, sustained carminative treatment would be inappropriate mainly because:", "a": "Aromatic waters generally provide only a mild effect due to their very low dissolved concentration", "d": ["Peppermint water has no official use whatsoever", "Peppermint water is toxic at any dose", "Peppermint water cannot be taken orally"]},
+  {"q": "'Flavored vehicle' and 'therapeutically inactive' can both describe the same aromatic water because:", "a": "Taste/odor can be perceptible at concentrations far below what is needed for a pharmacological effect", "d": ["Flavor and pharmacological activity are always identical", "Vehicles cannot legally contain any active material", "Inactive substances have no taste by definition"]},
+  {"q": "Camphor water can act as both a soothing eye preparation and a rubefacient because:", "a": "Its effect depends on concentration and site of application", "d": ["It is chemically different in each formulation", "Rubefacient camphor water contains no camphor", "The eye and skin have identical camphor tolerance"]},
+  {"q": "For a cough preparation needing both flavoring and mild expectorant action, the best official aromatic water choice is:", "a": "Chloroform water", "d": ["Peppermint water", "Orange water", "Rose water"]},
+  {"q": "The fact that peppermint and chloroform waters have official doses, while cinnamon and orange waters do not, implies that:", "a": "The former are used with an expected pharmacological effect, the latter purely as flavoring", "d": ["The former are dangerous and the latter are not", "Cinnamon and orange waters cannot legally be dosed at all", "Peppermint and chloroform waters are not aromatic waters"]},
+  {"q": "Hamamelis water requiring distillation as its only method, unlike most other waters, most likely reflects:", "a": "That its aromatic constituents cannot be adequately obtained by simpler direct-mixing methods", "d": ["A legal requirement unrelated to chemistry", "Its extremely high cost compared to rose water", "The fact that it contains no volatile substances"]},
+  {"q": "Substituting rose water for Hamamelis water in an astringent aftershave formulation would be inappropriate mainly because:", "a": "Rose water lacks the astringent property that Hamamelis water provides", "d": ["Rose water is not classified as an aromatic water", "Rose water cannot be used in cosmetics", "Rose water is more expensive than Hamamelis water"]},
+  {"q": "Ranking the four methods by emphasis on removing undissolved particles, which pairing is most accurate?", "a": "Distillation needs the least explicit filtration; Solution and Alternate solution need the most", "d": ["Dilution always requires the most filtration", "Distillation always requires more filtration than Solution", "All four methods require identical filtration"]},
+  {"q": "For fast, large-batch production accepting some foaming/odor trade-offs, the best-fitting method is:", "a": "Dilution using an SAA solution", "d": ["Distillation", "Solution", "Alternate solution"]},
+  {"q": "Hamamelis water is an exception to the general cost/practicality argument against distillation because:", "a": "Simpler methods cannot adequately reproduce its aromatic constituents", "d": ["It has no volatile constituents to distill", "It requires no purified water at all", "It is never actually distilled in practice"]},
+  {"q": "If an under-saturated distillate is corrected by one additional distillation pass, the total process and expected result is:", "a": "Re-distillation is performed, and the product would be labeled 'XX'", "d": ["No correction is possible once distilled", "The product is automatically discarded", "The product would be labeled 'X' regardless of passes"]},
+  {"q": "'Sufficient purified water' and distilling 'most' (not all) of the water in distillation together ensure:", "a": "Enough distillate volume without over-concentration, scorching, or wasted effort", "d": ["Complete evaporation of all liquid present", "Zero excess oil in the final product", "A permanently unsaturated solution"]},
+  {"q": "Hamamelis water and Stronger rose/orange flower water are grouped under 'distillation' because:", "a": "They share the same core technique of distilling fresh plant material, even though only Hamamelis strictly requires it", "d": ["They require completely different apparatus", "Only Hamamelis water actually uses a still", "They are chemically identical substances"]},
+  {"q": "Using boiling purified water helps solve the Solution method's clarity problem mainly because:", "a": "It better disperses/dissolves the volatile substance and reduces fine filter-passing particulate matter", "d": ["It sterilizes the filter paper completely", "It doubles the saturation concentration permanently", "It removes the need for the 12-hour standing period"]},
+  {"q": "The Solution method being both 'easy, simple equipment' and 'time-consuming' is explained because:", "a": "These describe technical simplicity versus overall process duration, not labor intensity", "d": ["The two descriptions are actually contradictory and one must be wrong", "'Easy' refers only to cost, not steps", "'Time-consuming' means it requires many operators"]},
+  {"q": "Skipping the 12-hour standing period in the Solution method would most likely result in:", "a": "An under-saturated product, possibly still containing unsettled fine particles", "d": ["A more concentrated, over-saturated product", "No effect on the final product at all", "Immediate formation of pure crystals"]},
+  {"q": "The self-regulating saturation of chloroform water arises because:", "a": "Chloroform's higher density keeps excess as a bottom layer that continually re-supplies chloroform lost to evaporation", "d": ["Chloroform reacts chemically with water to form a stable complex", "Chloroform's low volatility keeps concentration constant", "The bottle is always refrigerated to prevent loss"]},
+  {"q": "Shaking chloroform water before dispensing a dose is problematic for two reasons:", "a": "It delivers unpredictable/excessive chloroform and contradicts explicit dispensing instructions", "d": ["It has no real consequence and is simply an old myth", "It only affects the smell, not the dose", "It converts chloroform into phosgene immediately"]},
+  {"q": "Chloroform water's preparation most closely resembles which general method, and why?", "a": "The Solution method, since both agitate excess volatile substance directly with purified water to saturation", "d": ["The Alternate solution method, since both use purified talc", "The Dilution method, since both start from a pre-made concentrate", "Distillation, since both use a still and condenser"]},
+  {"q": "Talc's dissolution-speeding mechanism (Alternate solution) differs from boiling water's clarity fix (Solution method) mainly in that:", "a": "One increases surface area to speed dissolving; the other reduces fine particulate matter in the finished filtrate", "d": ["They are identical mechanisms with different names", "Boiling water also increases surface area of talc", "Talc is used to slow down dissolution intentionally"]},
+  {"q": "Persistent haze in an Alternate-solution-method product despite repeated filtration is most likely caused by:", "a": "Very fine talc/silica particles passing through the filter paper, correctable by elutriation", "d": ["Excess volatile oil, correctable by adding more talc", "Bacterial contamination, correctable by boiling", "Low temperature, correctable by heating"]},
+  {"q": "If talc were removed entirely from the Alternate solution method, the most likely changes would be:", "a": "Loss of the time-saving advantage, and disappearance of the fine-particle filtration problem", "d": ["No change at all to the process", "Complete loss of all aroma", "Automatic conversion to the Dilution method"]},
+  {"q": "Elutriation separates fine particles from a liquid without a filter membrane because:", "a": "Differences in particle size/shape/density affect how particles are carried or settle in a flowing stream", "d": ["All particles have identical density in liquid", "The stream chemically dissolves unwanted particles", "Filter membranes are used as part of elutriation"]},
+  {"q": "Replacing elutriation with a much longer passive settling time would likely:", "a": "Be less reliable, since very fine particles may settle extremely slowly or not at all", "d": ["Give an identical result, since gravity always works the same as flow separation", "Immediately remove all fine particles regardless of size", "Convert the fine particles into terpeneless oil"]},
+  {"q": "Because terpenes are the least water-soluble fraction of peppermint oil, the clarification/filtration step primarily removes:", "a": "The insoluble terpene fraction, leaving the more water-compatible constituents", "d": ["All dissolved alcohols and ketones", "The entire peppermint oil content", "Only bacterial contaminants"]},
+  {"q": "A manufacturer wanting maximum clarity and shelf stability, despite higher cost, should choose:", "a": "Terpeneless oil (aroma carrier)", "d": ["Natural essential oil (terpene oil)", "Raw undistilled peppermint leaves", "Unfiltered peppermint water"]},
+  {"q": "A product made from terpeneless oil, compared to one made from natural essential oil, would likely need:", "a": "Less or no clarification filtration, since the poorly soluble terpene fraction was already removed", "d": ["More filtration, since terpeneless oil contains more terpenes", "The same amount of filtration in all cases", "No filtration is ever needed for either"]},
+  {"q": "If 2 ml of concentrate diluted to 100 ml gives about 1.5% alcohol, the original concentrate's approximate alcohol content is:", "a": "Roughly 75%", "d": ["Roughly 1.5%", "Roughly 15%", "Roughly 3%"]},
+  {"q": "The alcohol-based and SAA-based Dilution variants share the underlying principle that:", "a": "A concentrated, stable carrier solution is prepared first, then diluted with water as needed", "d": ["Both must always use exactly the same surfactant", "Neither variant requires any dilution step", "Both eliminate the need for purified water entirely"]},
+  {"q": "Before substituting Tween 80 for Tween 20 in an SAA-based formula, the most relevant property to check is:", "a": "The surfactant's solubilizing capacity and related properties (odor, pH, foaming)", "d": ["The exact brand name only", "The color of the surfactant", "Whether the surfactant is edible"]},
+  {"q": "Disagreeable taste and early mold growth in an SAA-based aromatic water both trace back to:", "a": "The lack of preservative/protective properties, a known vulnerability of SAA-based dilution", "d": ["Excess alcohol content", "Overfiltration through wetted paper", "Too much re-distillation"]},
+  {"q": "SAA dissolving terpenes 'also' is a disadvantage because it:", "a": "Can reintroduce terpene-related instability, undermining the purpose of using terpeneless oil", "d": ["Improves the stability of terpeneless oil formulations", "Has no relationship to terpeneless oil choice", "Always improves the final aroma strength"]},
+  {"q": "The advantage 'dissolves larger amounts of insoluble material' and disadvantage 'needs more oil for the same aroma' are:", "a": "Not contradictory — one is about solubilizing capacity, the other about aroma dilution by dissolved terpenes", "d": ["Directly contradictory and one must be a lecture error", "Describing exactly the same phenomenon", "Only applicable to non-SAA methods"]},
+  {"q": "Light and trace metal ions like iron(III) and copper(II) accelerate autoxidation of aroma-bearing solutes mainly by:", "a": "Catalyzing reactions with dissolved atmospheric oxygen", "d": ["Neutralizing all dissolved oxygen", "Converting terpenes into talc", "Reducing the water's saturation point to zero"]},
+  {"q": "Storing chloroform water in a clear glass bottle under sunlight risks producing:", "a": "Phosgene, a poisonous gas, via light-catalyzed oxidation of chloroform", "d": ["Benzoic acid crystals, from chloroform autoxidation", "Excess talc precipitate", "Terpeneless oil formation"]},
+  {"q": "Cold storage and use as a vehicle for an electrolyte drug can BOTH cause cloudiness in the same aromatic water because:", "a": "Both reduce the aromatic solute's effective solubility, via temperature-dependent solubility and salting-out respectively", "d": ["Both mechanisms are chemically identical processes", "Only cold storage can ever cause cloudiness", "Electrolyte drugs prevent all forms of solubility change"]},
+  {"q": "A chloroform water bottle stored for months shows a slightly reduced supernatant volume above the chloroform layer along with a fainter smell. The most consistent explanation, combining volatility and stability concepts, is:", "a": "Ongoing evaporative loss of chloroform (offset by the excess reservoir) alongside slow light/oxygen-catalyzed degradation of some chloroform to phosgene", "d": ["The purified water evaporated faster than the chloroform", "The talc absorbed all the chloroform", "The bottle must have been shaken vigorously every day"]},
+  {"q": "An aromatic water lecture describes 'saturation,' 'mold susceptibility,' and 'oxidative degradation' as separate stability concerns. Which best explains why all three still trace back to the same root property of these preparations?", "a": "All three arise because aromatic waters are dilute, unpreserved aqueous solutions of oxidizable, volatile, sparingly soluble substances — a composition that is inherently prone to solubility shifts, microbial growth, and oxidation", "d": ["All three are caused solely by exposure to metal ions", "All three are prevented automatically by the BP definition", "All three only occur if the aromatic water is diluted with alcohol"]}
+];
+
+let quizLevel = 'easy';
+let quizData = quizDataEasy;
+
+function shuffleArr(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+
+const quizList = document.getElementById('quizList');
+const quizScoreEl = document.getElementById('quizScore');
+let answeredCount = 0, correctCount = 0;
+
+function buildQuiz(){
+  quizList.innerHTML='';
+  answeredCount = 0; correctCount = 0;
+  document.getElementById('quizResults').classList.remove('show');
+  updateScore();
+
+  quizData.forEach((item, qi)=>{
+    const options = shuffleArr([item.a, ...item.d]);
+    const card = document.createElement('div');
+    card.className='qcard';
+    card.dataset.answered='0';
+    const letters = ['A','B','C','D'];
+    const optHtml = options.map((opt,i)=>`
+      <div class="opt" data-correct="${opt===item.a}">
+        <span class="letter">${letters[i]}</span><span>${opt}</span>
+      </div>`).join('');
+    card.innerHTML = `<span class="qnum">Question ${qi+1} / ${quizData.length}</span>
+      <div class="qtext">${item.q}</div>
+      <div class="opt-list">${optHtml}</div>`;
+    card.querySelectorAll('.opt').forEach(optEl=>{
+      optEl.addEventListener('click', ()=>{
+        if(card.dataset.answered==='1') return;
+        card.dataset.answered='1';
+        answeredCount++;
+        const isCorrect = optEl.dataset.correct === 'true';
+        if(isCorrect) correctCount++;
+        card.querySelectorAll('.opt').forEach(o=>{
+          if(o.dataset.correct==='true') o.classList.add('correct');
+        });
+        if(!isCorrect) optEl.classList.add('wrong');
+        optEl.classList.add('selected');
+        updateScore();
+        if(answeredCount === quizData.length) showResults();
+      });
+    });
+    quizList.appendChild(card);
+  });
+}
+function updateScore(){
+  quizScoreEl.textContent = `Score: ${correctCount} / ${answeredCount}`;
+}
+function showResults(){
+  const box = document.getElementById('quizResults');
+  const pct = Math.round((correctCount/quizData.length)*100);
+  document.getElementById('quizResultTitle').textContent = `You scored ${correctCount} / ${quizData.length} (${pct}%)`;
+  document.getElementById('quizResultText').textContent = pct>=80 ? "Strong grasp of the material." : pct>=50 ? "Solid start — review the missed topics above." : "Revisit the Overview and Flash Cards, then try again.";
+  box.classList.add('show');
+}
+document.getElementById('quizReshuffle').addEventListener('click', buildQuiz);
+document.getElementById('quizCheckAll').addEventListener('click', ()=>{
+  document.querySelectorAll('.qcard').forEach(card=>{
+    if(card.dataset.answered==='1') return;
+    card.dataset.answered='1';
+    const correctOpt = card.querySelector('.opt[data-correct="true"]');
+    correctOpt.classList.add('correct');
+    answeredCount++;
+  });
+  updateScore();
+  if(answeredCount===quizData.length) showResults();
+});
+
+const quizLevelBtns = document.querySelectorAll('#quizLevelRow .filter-btn');
+const quizLevelSets = {easy:quizDataEasy, medium:quizDataMedium, hard:quizDataHard};
+quizLevelBtns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    quizLevelBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    quizLevel = btn.dataset.level;
+    quizData = quizLevelSets[quizLevel];
+    buildQuiz();
+  });
+});
+
+buildQuiz();
+</script>
+</body>
+</html>
